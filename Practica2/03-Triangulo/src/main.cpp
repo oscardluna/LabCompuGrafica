@@ -9,6 +9,7 @@
 #include <GLFW/glfw3.h>
 
 // program include
+#include "Headers/InputManager.h"
 #include "Headers/TimeManager.h"
 
 // Shaders code
@@ -16,12 +17,13 @@ const GLchar* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 position;\n"
 "void main()\n"
 "{\n"
-"gl_Position = vec4(position, 1.0);\n"
+"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
 "}\0";
 const GLchar* fragmentShaderSource = "#version 330 core\n"
 "out vec4 color;\n"
 "void main()\n"
 "{\n"
+//Cambiamos a morado con color = vec4(1.0f, 0.0f, 1.0f, 1.0f)
 "color = vec4(0.3f, 0.6f, 0.9f, 1.0f);\n"
 "}\n\0";
 
@@ -32,11 +34,7 @@ int screenWidth;
 int screenHeight;
 
 GLFWwindow * window;
-
-bool exitApp = false;
-int lastMousePosX;
-int lastMousePosY;
-
+InputManager inputManager;
 double deltaTime;
 
 // Se definen todos las funciones.
@@ -50,7 +48,7 @@ bool processInput(bool continueApplication = true);
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
-	
+
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		exit(-1);
@@ -82,6 +80,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glfwSwapInterval(0);
 
 	glfwSetWindowSizeCallback(window, reshapeCallback);
+	glfwSetWindowSizeCallback(window, reshapeCallback);
 	glfwSetKeyCallback(window, keyCallback);
 	glfwSetCursorPosCallback(window, mouseCallback);
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
@@ -100,7 +99,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	// Build and compile our shader program
 	// Vertex shader
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	vertexShader = glCreateShader(GL_VERTEX_SHADER);		//Creamos sheder de vertices
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
 	// Check for compile time errors
@@ -137,7 +136,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	}
 
 	// Vertex data
-	GLfloat vertices[] = { -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.0f, 0.5f, 0.0f };
+	//Se usa la f para distinguir que son flotantes
+	//Sistema de coordenadas de dispositivo
+	GLfloat vertices[] = { -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 0.0f, 0.5, 0.5, 0.0, -0.5, 0.5, 0.0, -0.5, -0.5, 0.0 };
 
 	// Create Buffers and attributes vertex.
 	glGenVertexArrays(1, &VAO);
@@ -145,6 +146,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//Datos del buffer que vamos a utilizar
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
@@ -187,39 +189,26 @@ void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode) {
-	if (action == GLFW_PRESS) {
-		switch (key) {
-		case GLFW_KEY_ESCAPE:
-			exitApp = true;
-			break;
-		}
-	}
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		inputManager.keyPressed(InputManager::InputCodes::kEscape, deltaTime);
 }
 
 void mouseCallback(GLFWwindow* window, double xpos, double ypos) {
-	lastMousePosX = xpos;
-	lastMousePosY = ypos;
+	inputManager.mouseMoved(xpos, ypos);
 }
 
 void mouseButtonCallback(GLFWwindow* window, int button, int state, int mod) {
-	if (state == GLFW_PRESS) {
-		switch (button) {
-		case GLFW_MOUSE_BUTTON_RIGHT:
-			std::cout << "lastMousePos.y:" << lastMousePosY << std::endl;
-			break;
-		case GLFW_MOUSE_BUTTON_LEFT:
-			std::cout << "lastMousePos.x:" << lastMousePosX << std::endl;
-			break;
-		case GLFW_MOUSE_BUTTON_MIDDLE:
-			std::cout << "lastMousePos.x:" << lastMousePosX << std::endl;
-			std::cout << "lastMousePos.y:" << lastMousePosY << std::endl;
-			break;
-		}
-	}
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && state == GLFW_PRESS)
+		inputManager.mouseClicked(InputManager::MouseCodes::button_right);
+	else if (button == GLFW_MOUSE_BUTTON_LEFT && state == GLFW_PRESS)
+		inputManager.mouseClicked(InputManager::MouseCodes::button_left);
+	else if (button == GLFW_MOUSE_BUTTON_MIDDLE && state == GLFW_PRESS)
+		inputManager.mouseClicked(InputManager::MouseCodes::button_middle);
 }
 
-bool processInput(bool continueApplication){
-	if (exitApp || glfwWindowShouldClose(window) != 0) {
+bool processInput(bool continueApplication) {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS
+		|| glfwWindowShouldClose(window) != 0) {
 		return false;
 	}
 	deltaTime = 1 / TimeManager::Instance().CalculateFrameRate(false);
@@ -237,7 +226,8 @@ void applicationLoop() {
 		// Draw our first triangle
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//Cambia de 3 a 6 para observar el rectángulo
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
@@ -250,4 +240,3 @@ int main(int argc, char ** argv) {
 	destroy();
 	return 1;
 }
-
