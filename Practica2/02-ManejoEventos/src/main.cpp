@@ -22,6 +22,8 @@ int lastMousePosY;
 
 double deltaTime;
 
+bool isBlue=true;
+
 // Se definen todos las funciones.
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -99,7 +101,16 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+		case GLFW_KEY_B:
+			isBlue = true;
+			break;
+		case GLFW_KEY_R:
+			isBlue = false;
+			break;
+
 		}
+
+
 	}
 }
 
@@ -139,6 +150,10 @@ void applicationLoop() {
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT);
+		if (isBlue)
+			glClearColor(0.0, 0.0, 1.0,1.0);
+		else
+			glClearColor(1.0, 0.0, 0.0, 1.0);
 		glfwSwapBuffers(window);
 	}
 }
