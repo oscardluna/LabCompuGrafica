@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGeIHC_IRR", "CGeIHC_IRR\CGeIHC_IRR.vcxproj", "{7DD434AF-9A16-43A7-ABCE-E462E6F68538}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DD434AF-9A16-43A7-ABCE-E462E6F68538}.Debug|x64.ActiveCfg = Debug|x64
+		{7DD434AF-9A16-43A7-ABCE-E462E6F68538}.Debug|x64.Build.0 = Debug|x64
+		{7DD434AF-9A16-43A7-ABCE-E462E6F68538}.Debug|x86.ActiveCfg = Debug|Win32
+		{7DD434AF-9A16-43A7-ABCE-E462E6F68538}.Debug|x86.Build.0 = Debug|Win32
+		{7DD434AF-9A16-43A7-ABCE-E462E6F68538}.Release|x64.ActiveCfg = Release|x64
+		{7DD434AF-9A16-43A7-ABCE-E462E6F68538}.Release|x64.Build.0 = Release|x64
+		{7DD434AF-9A16-43A7-ABCE-E462E6F68538}.Release|x86.ActiveCfg = Release|Win32
+		{7DD434AF-9A16-43A7-ABCE-E462E6F68538}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {701F1E8C-2C78-481D-99DC-4EF7DF1A6F92}
+	EndGlobalSection
+EndGlobal

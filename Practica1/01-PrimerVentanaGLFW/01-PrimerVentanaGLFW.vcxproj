@@ -17,7 +17,11 @@
     <ProjectGuid>{b98acf74-7f50-4bd9-91f2-29a71cf62e59}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>_01_PrimerVentanaGLFW</RootNamespace>
+<<<<<<< HEAD
     <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+=======
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+>>>>>>> cc3ec911c2ee2ed40dffdc2a3dfbc4cbeeb2ead4
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
