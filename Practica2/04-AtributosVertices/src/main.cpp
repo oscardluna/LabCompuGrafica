@@ -1,3 +1,4 @@
+
 //glew include
 #include <GL/glew.h>
 
@@ -33,9 +34,12 @@ const GLchar* fragmentShaderSource = { "#version 400\n"
 "  out_Color = vec4(ourColor, 1.0);\n"
 "}\n" };
 
+
 bool render1 = true;
 
 GLuint VBO, VAO, VBO2, VAO2, VBO3, VAO3, VBO4, VAO4, VBO5, VAO5, VBO6, VAO6, VBO7, VAO7, VBO8, VAO8, VBO9, VAO9, VBO10, VAO10, VBO11, VAO11, VBO12, VAO12, VBO13, VAO13, VBO14, VAO14;
+
+
 GLint vertexShader, fragmentShader, shaderProgram;
 
 typedef struct {
@@ -195,6 +199,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		{ { 0.2f, 0.4f, 0.0f } ,{ 0.67f, 0.84f, 0.90f } },
 		{ { 0.2f, 0.2f, 0.0f } ,{ 0.67f, 0.84f, 0.90f } },
 		{ { 0.4f, 0.2f, 0.0f } ,{ 0.67f, 0.84f, 0.90f } }
+
 	};
 
 	Vertex vertices7[] =
@@ -281,7 +286,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glBindVertexArray(0);
 
 	//Esto es para el segundo triangulo
-	
+
 	const size_t bufferSize2 = sizeof(vertices2);
 	const size_t vertexSize2 = sizeof(vertices2[0]);
 	const size_t rgbOffset2 = sizeof(vertices2[0].XYZ);
@@ -307,6 +312,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
 
 
 	//Esto es para el tercer triángulo
@@ -698,7 +704,10 @@ void applicationLoop() {
 		{
 			glBindVertexArray(VAO);
 			//Si queremos dibujar  mas triangulos debemos cambiar el 3 por el numero de vertices
+
 			glDrawArrays(GL_TRIANGLES, 0, 144);
+			glDrawArrays(GL_TRIANGLES, 0, 3);
+
 		}
 		else
 		{
@@ -711,6 +720,7 @@ void applicationLoop() {
 
 		glBindVertexArray(VAO2);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+
 
 		glBindVertexArray(VAO3);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -748,6 +758,7 @@ void applicationLoop() {
 		glBindVertexArray(VAO14);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
+
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
@@ -759,4 +770,7 @@ int main(int argc, char ** argv) {
 	applicationLoop();
 	destroy();
 	return 1;
+
 }
+
+
