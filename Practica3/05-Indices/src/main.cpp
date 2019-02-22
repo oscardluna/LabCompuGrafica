@@ -62,6 +62,12 @@ void destroyWindow();
 void destroy();
 bool processInput(bool continueApplication = true);
 
+//De la cosecha
+void creaRec();
+
+//Estrella
+void creaEstrella();
+
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	
@@ -150,6 +156,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 			<< std::endl;
 	}
 
+	/*
 	// This is for the render with index element
 	Vertex vertices[] =
 	{
@@ -195,7 +202,131 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0); */
+
+	//creaRec();
+	creaEstrella();
+}
+
+
+//Tarea Práctica
+void creaEstrella()
+{
+	Vertex vertices[] =
+	{
+		//Centro de la estrella
+		{ { 0.0f, 0.0f, 0.0 },		{ 1.0f, 1.0f, 1.0f } },
+
+		//Parte de arriba
+		{ { -0.2f , 0.8f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { 0.2f , 0.8f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { 0.0f , 0.8f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
+		{ { 0.0f , 1.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+
+		//Parte inferior
+		//{ { -0.2f , -0.8f, 0.0f },{ 0.0f, 1.0f, 0.0f } },
+		//{ { 0.2f , -0.8f , 0.0f },{ 0.0f, 0.0f, 1.0f } },
+		//{ { 0.0f , -0.8f , 0.0f },{ 1.0f, 0.0f, 1.0f } },
+		//{ { 0.0f , -1.0f , 0.0f },{ 1.0f, 0.0f, 0.0f } },
+	};
+
+
+	GLuint indices[] =
+	{
+		//Parte de arrib<a
+		0, 3, 1,
+		0, 2, 3,
+		3, 4, 1,
+		3, 2, 4
+
+		//Parte inferior
+	//	0, 7, 5,
+	//	0, 6, 7,
+	//	7, 5, 8
+	};
+
+	const size_t VertexSize = sizeof(vertices);
+	//Tamaño que vale todo el vertico
+	const size_t StrideSize = sizeof(vertices[0]);
+	const size_t OffsetPos = sizeof(vertices[0].XYZ);
+
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	glGenBuffers(1, &VBO);
+	//Enlaza el buffer de los datos al VertexArray
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	glBufferData(GL_ARRAY_BUFFER, VertexSize, vertices, GL_STATIC_DRAW);
+
+	//Configura la estructura de los datos (Primero vertices, luego color)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, StrideSize, 0);
+
+	//Configuramos color
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, StrideSize, (GLvoid*)OffsetPos);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+
+
+	//Otro tipo de buffer
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	//Vuelve a la configuración inicial
+	glBindVertexArray(0);
+}
+
+//De la cosecha x2
+void creaRec()
+{
+	Vertex vertices[] = 
+	{
+		{ { -0.5f, -0.5f, 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+		{ { 0.5f , -0.5f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { 0.5f , 0.5f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { -0.5f , 0.5f , 0.0f },	{ 1.0f, 0.0f, 1.0f } }, 
+	};
+
+
+	GLuint indices[] =
+	{
+		0, 1, 2,
+		0, 2, 3
+	};
+
+	const size_t VertexSize = sizeof(vertices);
+	//Tamaño que vale todo el vertico
+	const size_t StrideSize = sizeof(vertices[0]);
+	const size_t OffsetPos = sizeof(vertices[0].XYZ);
+
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	glGenBuffers(1, &VBO);
+	//Enlaza el buffer de los datos al VertexArray
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	glBufferData(GL_ARRAY_BUFFER, VertexSize, vertices, GL_STATIC_DRAW);
+
+	//Configura la estructura de los datos (Primero vertices, luego color)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, StrideSize, 0);
+
+	//Configuramos color
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, StrideSize, (GLvoid*) OffsetPos);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+
+
+	//Otro tipo de buffer
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	//Vuelve a la configuración inicial
+	glBindVertexArray(0);
 }
 
 void destroyWindow() {
@@ -286,7 +417,12 @@ void applicationLoop() {
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
 		// This is for the render with index element
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		//Esta es para 
+		//AUMENTAMOS EL NUMERO DE INDICES
+		glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+
+		//De la cosecha x3
+		glDrawArrays(GL_TRIANGLES, 0, 4);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
