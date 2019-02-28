@@ -62,10 +62,10 @@ void destroyWindow();
 void destroy();
 bool processInput(bool continueApplication = true);
 
-//De la cosecha
+//Dibuja un rectángulo
 void creaRec();
 
-//Estrella
+//Dibuja una estrella
 void creaEstrella();
 
 // Implementacion de todas las funciones.
@@ -214,7 +214,7 @@ void creaEstrella()
 {
 	Vertex vertices[] =
 	{
-		//Centro de la estrella
+		/* C E N T R O  E S T R E L L A */
 		{ { 0.0f, 0.0f, 0.0 },		{ 1.0f, 1.0f, 1.0f } },
 
 		//Parte de arriba
@@ -223,30 +223,58 @@ void creaEstrella()
 		{ { 0.0f , 0.8f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
 		{ { 0.0f , 1.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
 
-		//Parte inferior
-		//{ { -0.2f , -0.8f, 0.0f },{ 0.0f, 1.0f, 0.0f } },
-		//{ { 0.2f , -0.8f , 0.0f },{ 0.0f, 0.0f, 1.0f } },
-		//{ { 0.0f , -0.8f , 0.0f },{ 1.0f, 0.0f, 1.0f } },
-		//{ { 0.0f , -1.0f , 0.0f },{ 1.0f, 0.0f, 0.0f } },
+
+		/* P A R T E  I Z Q U I E R D A */
+		{ { -0.8f , -0.2f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { -0.8f , 0.2f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { -0.8f , 0.0f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
+		{ { -1.0f , 0.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+
+
+		/* P A R T E  I N F E R I O R */
+		{ { 0.2f , -0.8f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { -0.2f , -0.8f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { 0.0f , -0.8f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
+		{ { 0.0f , -1.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+
+
+		/* P A R T E  D E R E C H A */
+		{ { 0.8f , 0.2f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { 0.8f , -0.2f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { 0.8f , 0.0f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
+		{ { 1.0f , 0.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
 	};
 
 
 	GLuint indices[] =
 	{
-		//Parte de arrib<a
+		//Parte de arriba
 		0, 3, 1,
 		0, 2, 3,
 		3, 4, 1,
-		3, 2, 4
+		3, 2, 4,
 
-		//Parte inferior
-	//	0, 7, 5,
-	//	0, 6, 7,
-	//	7, 5, 8
+		/* P A R T E  I Z Q U I E R D A */
+		0, 7, 5,
+		0, 6, 7,
+		7, 8, 5,
+		7, 6, 8,
+
+		/* P A R T E  I N F E R I O R */
+		0, 11, 9,
+		0, 10, 11,
+		11, 12, 9,
+		11, 10, 12,
+
+		/* P A R T E  D E R E C H A */
+		0, 15, 13,
+		0, 14, 15,
+		15, 16, 13,
+		15, 14, 16,
 	};
 
 	const size_t VertexSize = sizeof(vertices);
-	//Tamaño que vale todo el vertico
+	//Tamaño que vale todo el vertice
 	const size_t StrideSize = sizeof(vertices[0]);
 	const size_t OffsetPos = sizeof(vertices[0].XYZ);
 
@@ -419,7 +447,7 @@ void applicationLoop() {
 		// This is for the render with index element
 		//Esta es para 
 		//AUMENTAMOS EL NUMERO DE INDICES
-		glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 50, GL_UNSIGNED_INT, 0);
 
 		//De la cosecha x3
 		glDrawArrays(GL_TRIANGLES, 0, 4);
