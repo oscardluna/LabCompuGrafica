@@ -12,7 +12,7 @@
 #include "Headers/TimeManager.h"
 #include "Headers/Shader.h"
 
-Shader shader;
+Shader shader;	//instancia del objeto shader
 
 GLuint VBO, VAO, EBO;
 
@@ -44,7 +44,7 @@ bool processInput(bool continueApplication = true);
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
-	
+
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		exit(-1);
@@ -92,6 +92,10 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glViewport(0, 0, screenWidth, screenHeight);
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
+	//inicializar los shaders de vrtices y fragmento
+	//los atributos son las rutas relativas de los archivos donde estan almacenados los shaders
+	//el primer nombre del archivo es el shader de vertices
+	//y el segundo el shader de fragmento
 	shader.initialize("../../Shaders/basic.vs", "../../Shaders/basic.fs");
 
 	// This is for the render with index element
@@ -201,7 +205,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int state, int mod) {
 	}
 }
 
-bool processInput(bool continueApplication){
+bool processInput(bool continueApplication) {
 	if (exitApp || glfwWindowShouldClose(window) != 0) {
 		return false;
 	}
@@ -217,7 +221,8 @@ void applicationLoop() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		
+
+		//este metodo sirve para activar los shader que deseamos utilizar
 		shader.turnOn();
 
 		glBindVertexArray(VAO);
@@ -225,6 +230,7 @@ void applicationLoop() {
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
+		//para desactivar el uso del shader
 		shader.turnOff();
 
 		glfwSwapBuffers(window);
