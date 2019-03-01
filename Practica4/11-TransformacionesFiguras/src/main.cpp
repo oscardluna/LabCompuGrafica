@@ -18,14 +18,42 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Shader shader;
-
 GLuint VBO, VAO, EBO;
+
 struct Vertex {
 	glm::vec3 m_Pos;
 	glm::vec3 m_Color;
 };
 
+// This is for the render with index element
+Vertex vertices[] =
+{
+	{ glm::vec3(-0.5f, -0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },
+	{ glm::vec3(0.5f , -0.5f, 0.5f) , glm::vec3(0.0f, 1.0f, 0.0f) },
+	{ glm::vec3(0.5f ,  0.5f, 0.5f) , glm::vec3(0.0f, 0.0f, 1.0f) },
+	{ glm::vec3(-0.5f,  0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 1.0f) },
+	{ glm::vec3(0.5f , -0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
+	{ glm::vec3(0.5f ,  0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
+	{ glm::vec3(-0.5f , 0.5f, -0.5f) ,glm::vec3(0.0f, 0.0f, 1.0f) },
+	{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.0f, 1.0f, 0.0f) },
+};
+
+GLuint indices[] = {  // Note that we start from 0!
+	0, 1, 2,
+	0, 2, 3,
+	1, 4, 5,
+	1, 5, 2,
+	0, 3, 6,
+	0, 6, 7,
+	0, 4, 1,
+	0, 7, 4,
+	3, 2, 5,
+	3, 5, 6,
+	4, 5, 6,
+	4, 6, 7
+};
+
+Shader shader;
 
 int screenWidth;
 int screenHeight;
@@ -47,6 +75,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen);
 void destroyWindow();
 void destroy();
 bool processInput(bool continueApplication = true);
+void cubo();
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
@@ -100,36 +129,11 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	glEnable(GL_DEPTH_TEST);
 
-	shader.initialize("../../Shaders/sistemasCoordenadas.vs", "../../Shaders/sistemasCoordenadas.fs");
+	shader.initialize("../../Shaders/transformaciones.vs", "../../Shaders/transformaciones.fs");
+	cubo();
+}
 
-	// This is for the render with index element
-	Vertex vertices[] =
-	{
-		{ glm::vec3(-0.5f, -0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },
-		{ glm::vec3(0.5f , -0.5f, 0.5f) , glm::vec3(0.0f, 1.0f, 0.0f) },
-		{ glm::vec3(0.5f ,  0.5f, 0.5f) , glm::vec3(0.0f, 0.0f, 1.0f) },
-		{ glm::vec3(-0.5f,  0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 1.0f) },
-		{ glm::vec3(0.5f , -0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
-		{ glm::vec3(0.5f ,  0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
-		{ glm::vec3(-0.5f , 0.5f, -0.5f) ,glm::vec3(0.0f, 0.0f, 1.0f) },
-		{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.0f, 1.0f, 0.0f) },
-	};
-
-	GLuint indices[] = {  // Note that we start from 0!
-		0, 1, 2, 
-		0, 2, 3,
-		1, 4, 5,
-		1, 5, 2,
-		0, 3, 6,
-		0, 6, 7,
-		0, 4, 1,
-		0, 7, 4,
-		3, 2, 5,
-		3, 5, 6,
-		4, 5, 6,
-		4, 6, 7
-	};
-
+void cubo() {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	// This is for the render with index element
@@ -163,6 +167,7 @@ void destroyWindow() {
 
 void destroy() {
 	destroyWindow();
+
 	shader.destroy();
 
 	glDisableVertexAttribArray(0);
@@ -228,16 +233,6 @@ void applicationLoop() {
 	bool psi = true;
 	double lastTime = TimeManager::Instance().GetTime();
 
-	float fovy = 0;
-
-	glm::vec3 cubePositions[] =
-	{	glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-2.0f, -5.0f, -15.0f),
-		glm::vec3(-1.5f, 2.2f, -2.5f), glm::vec3(1.8f, 1.0f, -12.3f),
-		glm::vec3(4.4f, -0.4f, -3.5f), glm::vec3(-6.7f, 3.0f, -7.5f),
-		glm::vec3(-4.3f, -3.0f, -2.5f), glm::vec3(3.5f, 8.0f, -2.5f),
-		glm::vec3(-1.7f, -0.7f, -1.5f), glm::vec3(3.3f, 3.0f, -1.5f)
-	};
-
 	while (psi) {
 		psi = processInput(true);
 		
@@ -246,25 +241,22 @@ void applicationLoop() {
 
 		shader.turnOn();
 
-		GLint modelLoc = shader.getUniformLocation("model");
-		GLint viewLoc = shader.getUniformLocation("view");
-		GLint projLoc = shader.getUniformLocation("projection");
+		GLuint modelLoc = shader.getUniformLocation("model");
+		GLuint viewLoc = shader.getUniformLocation("view");
+		GLuint projLoc = shader.getUniformLocation("projection");
 
-		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -7.0f));
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), 
-			(float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f),
+			(float)screenWidth / screenWidth, 0.01f, 100.0f);
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -8.0f));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+		glm::mat4 model = glm::mat4(1.0f);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		glBindVertexArray(VAO);
-		for (GLuint i = 0; i < 10; i++) {
-			glm::mat4 model = glm::translate(glm::mat4(1.0f), cubePositions[i]);
-			GLfloat angle = 20.0f * i;
-			model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-			// This is for the render with index element
-			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		}
+		// This is for the render with index element
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 		glBindVertexArray(0);
 
 		shader.turnOff();
