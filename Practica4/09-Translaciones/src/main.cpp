@@ -18,6 +18,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 GLuint VBO, VAO, EBO;
+
 struct Vertex {
 	glm::vec3 m_Pos;
 	glm::vec3 m_Color;
@@ -71,6 +72,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen);
 void destroyWindow();
 void destroy();
 bool processInput(bool continueApplication = true);
+void cubo();
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
@@ -122,6 +124,10 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glViewport(0, 0, screenWidth, screenHeight);
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
+	cubo();
+}
+
+void cubo() {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	// This is for the render with index element
@@ -221,14 +227,6 @@ void applicationLoop() {
 
 	float fovy = 0;
 
-	glm::vec3 cubePositions[] =
-	{	glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-2.0f, -5.0f, -15.0f),
-		glm::vec3(-1.5f, 2.2f, -2.5f), glm::vec3(1.8f, 1.0f, -12.3f),
-		glm::vec3(4.4f, -0.4f, -3.5f), glm::vec3(-6.7f, 3.0f, -7.5f),
-		glm::vec3(-4.3f, -3.0f, -2.5f), glm::vec3(3.5f, 8.0f, -2.5f),
-		glm::vec3(-1.7f, -0.7f, -1.5f), glm::vec3(3.3f, 3.0f, -1.5f)
-	};
-
 	while (psi) {
 		psi = processInput(true);
 		
@@ -237,7 +235,7 @@ void applicationLoop() {
 
 		glBindVertexArray(VAO);
 		// This is for the render with index element
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0 + 24);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
