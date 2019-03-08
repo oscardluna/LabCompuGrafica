@@ -27,7 +27,11 @@
     <ProjectGuid>{40050654-71b0-47ee-b429-51a369d9f50d}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>_13_SistemaCoordenadas</RootNamespace>
+<<<<<<< HEAD
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+=======
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+>>>>>>> 958ba502ec3a2d1e5909de5e63d349b4e1d83627
     <ProjectName>08-SistemasCoordenadas</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

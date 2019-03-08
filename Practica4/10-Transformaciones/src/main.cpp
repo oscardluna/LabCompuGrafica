@@ -28,6 +28,7 @@ struct Vertex {
 // This is for the render with index element
 Vertex vertices[] =
 {
+<<<<<<< HEAD
 	{ glm::vec3(-0.5f, -0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },
 { glm::vec3(0.5f , -0.5f, 0.5f) , glm::vec3(0.0f, 1.0f, 0.0f) },
 { glm::vec3(0.5f ,  0.5f, 0.5f) , glm::vec3(0.0f, 0.0f, 1.0f) },
@@ -36,6 +37,16 @@ Vertex vertices[] =
 { glm::vec3(0.5f ,  0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
 { glm::vec3(-0.5f , 0.5f, -0.5f) ,glm::vec3(0.0f, 0.0f, 1.0f) },
 { glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.0f, 1.0f, 0.0f) },
+=======
+	{ glm::vec3(-0.5f, -0.5f, 0.5f) ,	glm::vec3(1.0f, 0.0f, 1.0f) },
+	{ glm::vec3(0.5f , -0.5f, 0.5f) ,	glm::vec3(1.0f, 0.0f, 1.0f) },
+	{ glm::vec3(0.5f ,  0.5f, 0.5f) ,	glm::vec3(1.0f, 1.0f, 1.0f) },
+	{ glm::vec3(-0.5f,  0.5f, 0.5f) ,	glm::vec3(1.0f, 1.0f, 1.0f) },
+	{ glm::vec3(0.5f , -0.5f, -0.5f),	glm::vec3(1.0f, 0.0f, 1.0f) },
+	{ glm::vec3(0.5f ,  0.5f, -0.5f),	glm::vec3(1.0f, 0.0f, 1.0f) },
+	{ glm::vec3(-0.5f , 0.5f, -0.5f) ,	glm::vec3(1.0f, 1.0f, 0.0f) },
+	{ glm::vec3(-0.5f , -0.5f, -0.5f),	glm::vec3(1.0f, 1.0f, 0.0f) }, //Amarillo
+>>>>>>> 958ba502ec3a2d1e5909de5e63d349b4e1d83627
 };
 
 GLuint indices[] = {  // Note that we start from 0!
@@ -125,7 +136,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	}
 
 	glViewport(0, 0, screenWidth, screenHeight);
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.0f, 0.0f, 4.0f, 0.0f);
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -234,12 +245,20 @@ void applicationLoop() {
 	double lastTime = TimeManager::Instance().GetTime();
 
 
+<<<<<<< HEAD
 	glm::vec3 cubePositions[] = {
 		//posiciones del cubo
 		glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-2.0f, -5.0f, -15.0f),
 		glm::vec3(-1.5f, 2.2f, -2.5f), glm::vec3(1.8f, 1.0f, -12.3f),
 		glm::vec3(4.4f, -0.4f, -3.5f), glm::vec3(-6.7f, 3.0f, -7.5f),
 		glm::vec3(-4.3f, -3.0f, -2.5f), glm::vec3(3.5f, 8.0f, -2.5f),
+=======
+	glm::vec3 cubePositions[] = { 
+		glm::vec3(0.0f, 0.0f, 0.0f),	glm::vec3(-2.0f, -5.0f, -15.0f),
+		glm::vec3(-1.5f, 2.2f, -2.5f),	glm::vec3(1.8f, 1.0f, -12.3f),
+		glm::vec3(4.4f, -0.4f, -3.5f),	glm::vec3(-6.7f, 3.0f, -7.5f),
+		glm::vec3(-4.3f, -3.0f, -2.5f),	glm::vec3(3.5f, 8.0f, -2.5f),
+>>>>>>> 958ba502ec3a2d1e5909de5e63d349b4e1d83627
 		glm::vec3(-1.7f, -0.7f, -1.5f), glm::vec3(3.3f, 3.0f, -1.5f)
 	};
 
@@ -247,7 +266,8 @@ void applicationLoop() {
 		psi = processInput(true);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		//Color del fondo de la ventana 
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f); 
 
 		shader.turnOn();
 
@@ -262,13 +282,24 @@ void applicationLoop() {
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 		glBindVertexArray(VAO);
+<<<<<<< HEAD
 		float scale = 1.0f;
 
 		for (int i = 0; i < 10; i++) {
+=======
+
+		//De la cosecha
+
+		float scale = 1.0f;
+
+		for (int i = 0; i < 10; i++)
+		{
+>>>>>>> 958ba502ec3a2d1e5909de5e63d349b4e1d83627
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), cubePositions[i]);
 			model = glm::rotate(model, (float)i / 3.1416f, glm::vec3(1.0f, 0.3f, 0.0f));
 			model = glm::scale(model, glm::vec3(scale, scale, scale));
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+<<<<<<< HEAD
 			// This is for the render with index element
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 			scale += 0.2f;
@@ -283,6 +314,23 @@ void applicationLoop() {
 
 		// This is for the render with index element
 		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
+=======
+
+			// This is for the render with index elementcolor
+			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
+			scale += 0.1f;
+		}
+
+		//model = glm::rotate(model, (float)i / 3.1416f, glm::vec3(1.0f, 0.3, 0.0));
+
+		/*
+		glm::mat4 model = glm::mat4(1.0f);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+		//glBindVertexArray(VAO);
+		// This is for the render with index element
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);*/
+>>>>>>> 958ba502ec3a2d1e5909de5e63d349b4e1d83627
 		glBindVertexArray(0);
 
 		shader.turnOff();
