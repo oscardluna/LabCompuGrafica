@@ -20,6 +20,9 @@ bool exitApp = false;
 int lastMousePosX;
 int lastMousePosY;
 
+bool isBlue = true;
+bool isGreen = true;
+
 double deltaTime;
 
 // Se definen todos las funciones.
@@ -33,7 +36,7 @@ bool processInput(bool continueApplication = true);
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
-	
+
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		exit(-1);
@@ -64,6 +67,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(0);
 
+	//esta parte es para indicarle que funciones se van a ejecutar cuando suceda un evento
 	glfwSetWindowSizeCallback(window, reshapeCallback);
 	glfwSetKeyCallback(window, keyCallback);
 	glfwSetCursorPosCallback(window, mouseCallback);
@@ -99,6 +103,17 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+		case GLFW_KEY_B:
+			isBlue = true;
+			break;
+		case GLFW_KEY_R:
+			isBlue = false;
+			break;
+		case GLFW_KEY_G:
+			isGreen = true;
+			break;
+		case GLFW_KEY_Y:
+			isGreen = false;
 		}
 	}
 }
@@ -109,6 +124,7 @@ void mouseCallback(GLFWwindow* window, double xpos, double ypos) {
 }
 
 void mouseButtonCallback(GLFWwindow* window, int button, int state, int mod) {
+	//los estados son GLFW_PRESS, GLFW_REPETE, GLFW_RELEASE; Y TAMBIEN APLICAN PARA EL TECLADO
 	if (state == GLFW_PRESS) {
 		switch (button) {
 		case GLFW_MOUSE_BUTTON_RIGHT:
@@ -125,7 +141,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int state, int mod) {
 	}
 }
 
-bool processInput(bool continueApplication){
+bool processInput(bool continueApplication) {
 	if (exitApp || glfwWindowShouldClose(window) != 0) {
 		return false;
 	}
@@ -139,6 +155,15 @@ void applicationLoop() {
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT);
+		if (isBlue) {
+			glClearColor(0.0, 0.0, 1.0, 1.0);
+		}
+		else if (isGreen) {
+			glClearColor(0.0, 1.0, 0.0, 1.0);
+		}
+		else {
+			glClearColor(1.0, 0.0, 0.0, 1.0);
+		}
 		glfwSwapBuffers(window);
 	}
 }

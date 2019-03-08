@@ -61,8 +61,18 @@ void init(int width, int height, std::string strTitle, bool bFullScreen);
 void destroyWindow();
 void destroy();
 bool processInput(bool continueApplication = true);
+<<<<<<< HEAD
 void creaRectangulo();
 void creaEstrella();
+=======
+
+//Dibuja un rectángulo
+void creaRec();
+
+//Dibuja una estrella
+void creaEstrella();
+
+>>>>>>> 517146ea66e6ffac2003ee833d831e454fafd539
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	
@@ -150,6 +160,10 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog
 			<< std::endl;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 517146ea66e6ffac2003ee833d831e454fafd539
 	/*
 	// This is for the render with index element
 	Vertex vertices[] =
@@ -196,6 +210,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+<<<<<<< HEAD
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 	*/
 	
@@ -310,6 +325,162 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		glBindVertexArray(0);
 
 	}
+=======
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0); */
+
+	//creaRec();
+	creaEstrella();
+}
+
+
+//Tarea Práctica
+void creaEstrella()
+{
+	Vertex vertices[] =
+	{
+		/* C E N T R O  E S T R E L L A */
+		{ { 0.0f, 0.0f, 0.0 },		{ 1.0f, 1.0f, 1.0f } },
+
+		//Parte de arriba
+		{ { -0.2f , 0.8f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { 0.2f , 0.8f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { 0.0f , 0.8f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
+		{ { 0.0f , 1.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+
+
+		/* P A R T E  I Z Q U I E R D A */
+		{ { -0.8f , -0.2f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { -0.8f , 0.2f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { -0.8f , 0.0f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
+		{ { -1.0f , 0.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+
+
+		/* P A R T E  I N F E R I O R */
+		{ { 0.2f , -0.8f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { -0.2f , -0.8f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { 0.0f , -0.8f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
+		{ { 0.0f , -1.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+
+
+		/* P A R T E  D E R E C H A */
+		{ { 0.8f , 0.2f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { 0.8f , -0.2f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { 0.8f , 0.0f , 0.0f },	{ 1.0f, 0.0f, 1.0f } },
+		{ { 1.0f , 0.0f , 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+	};
+
+
+	GLuint indices[] =
+	{
+		//Parte de arriba
+		0, 3, 1,
+		0, 2, 3,
+		3, 4, 1,
+		3, 2, 4,
+
+		/* P A R T E  I Z Q U I E R D A */
+		0, 7, 5,
+		0, 6, 7,
+		7, 8, 5,
+		7, 6, 8,
+
+		/* P A R T E  I N F E R I O R */
+		0, 11, 9,
+		0, 10, 11,
+		11, 12, 9,
+		11, 10, 12,
+
+		/* P A R T E  D E R E C H A */
+		0, 15, 13,
+		0, 14, 15,
+		15, 16, 13,
+		15, 14, 16,
+	};
+
+	const size_t VertexSize = sizeof(vertices);
+	//Tamaño que vale todo el vertice
+	const size_t StrideSize = sizeof(vertices[0]);
+	const size_t OffsetPos = sizeof(vertices[0].XYZ);
+
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	glGenBuffers(1, &VBO);
+	//Enlaza el buffer de los datos al VertexArray
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	glBufferData(GL_ARRAY_BUFFER, VertexSize, vertices, GL_STATIC_DRAW);
+
+	//Configura la estructura de los datos (Primero vertices, luego color)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, StrideSize, 0);
+
+	//Configuramos color
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, StrideSize, (GLvoid*)OffsetPos);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+
+
+	//Otro tipo de buffer
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	//Vuelve a la configuración inicial
+	glBindVertexArray(0);
+}
+
+//De la cosecha x2
+void creaRec()
+{
+	Vertex vertices[] = 
+	{
+		{ { -0.5f, -0.5f, 0.0f },	{ 1.0f, 0.0f, 0.0f } },
+		{ { 0.5f , -0.5f, 0.0f },	{ 0.0f, 1.0f, 0.0f } },
+		{ { 0.5f , 0.5f , 0.0f },	{ 0.0f, 0.0f, 1.0f } },
+		{ { -0.5f , 0.5f , 0.0f },	{ 1.0f, 0.0f, 1.0f } }, 
+	};
+
+
+	GLuint indices[] =
+	{
+		0, 1, 2,
+		0, 2, 3
+	};
+
+	const size_t VertexSize = sizeof(vertices);
+	//Tamaño que vale todo el vertico
+	const size_t StrideSize = sizeof(vertices[0]);
+	const size_t OffsetPos = sizeof(vertices[0].XYZ);
+
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	glGenBuffers(1, &VBO);
+	//Enlaza el buffer de los datos al VertexArray
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	glBufferData(GL_ARRAY_BUFFER, VertexSize, vertices, GL_STATIC_DRAW);
+
+	//Configura la estructura de los datos (Primero vertices, luego color)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, StrideSize, 0);
+
+	//Configuramos color
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, StrideSize, (GLvoid*) OffsetPos);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+
+
+	//Otro tipo de buffer
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	//Vuelve a la configuración inicial
+	glBindVertexArray(0);
+}
+>>>>>>> 517146ea66e6ffac2003ee833d831e454fafd539
 
 void destroyWindow() {
 	glfwDestroyWindow(window);
@@ -399,10 +570,19 @@ void applicationLoop() {
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
 		// This is for the render with index element
+<<<<<<< HEAD
 		//parametros: primitiva,num indices,tipo de dato, apuntador
 		glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
 		
 		//glDrawArrays(GL_TRIANGLES, 0, 4);
+=======
+		//Esta es para 
+		//AUMENTAMOS EL NUMERO DE INDICES
+		glDrawElements(GL_TRIANGLES, 50, GL_UNSIGNED_INT, 0);
+
+		//De la cosecha x3
+		glDrawArrays(GL_TRIANGLES, 0, 4);
+>>>>>>> 517146ea66e6ffac2003ee833d831e454fafd539
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
