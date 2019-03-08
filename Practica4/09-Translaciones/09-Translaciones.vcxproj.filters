@@ -33,4 +33,8 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Shaders\transformaciones.fs" />
+    <None Include="..\..\Shaders\transformaciones.vs" />
+  </ItemGroup>
 </Project>
