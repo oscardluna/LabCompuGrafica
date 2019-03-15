@@ -20,6 +20,7 @@ const GLchar* vertexShaderSource = { "#version 400\n"
 
 "void main(void)\n"
 "{\n"
+<<<<<<< HEAD
 "  gl_Position = vec4(position, 1.0);\n"
 "  ourColor = color;\n"
 "}\n" };
@@ -32,6 +33,17 @@ const GLchar* fragmentShaderSource = { "#version 400\n"
 "{\n"
 "  out_Color = vec4(ourColor, 1.0);\n"
 "}\n" };
+=======
+"gl_Position = vec4(position, 1.0);\n"
+"}\0";
+const GLchar* fragmentShaderSource = "#version 330 core\n"
+"out vec4 color;\n"
+"void main()\n"
+
+"{\n"//para cambiar el color 
+"color = vec4(1.0f, 0.2f, 0.5f, 1.0f);\n"
+"}\n\0";
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 
 bool render1 = true;
 
@@ -152,6 +164,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 			<< std::endl;
 	}
 
+<<<<<<< HEAD
 	Vertex vertices[] =
 	{
 		//aqui vamos armando la casa
@@ -285,6 +298,11 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	std::cout << "Vertex Size:" << vertexSize << std::endl;
 	std::cout << "Buffer size:" << rgbOffset << std::endl;
 	glGenBuffers(1, &VBO);
+=======
+	// Vertex data
+	//de tres en tres, los tres primeros son del primer vertice V0,V1 y V2 respectivamente. Se agregan 9 mas para completar a un cuadrado
+	GLfloat vertices[] = { -1.0f, -1.0f, 0.0f, 0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 0.0f ,0.5f,0.5f,0.0f,-0.5f,0.5f,0.0f,-0.5f,-0.5f,0.0f};
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -418,6 +436,7 @@ void applicationLoop() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
 		glUseProgram(shaderProgram);
+<<<<<<< HEAD
 		//------------------------------------------
 		if (render1) {
 			glBindVertexArray(VAO);
@@ -429,6 +448,12 @@ void applicationLoop() {
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 		//---------------------------------------
+=======
+		glBindVertexArray(VAO);
+		
+		//para agregar los 3 nuevos vertices, se cambia a 6
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);

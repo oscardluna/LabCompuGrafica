@@ -1,4 +1,10 @@
-//glew include
+
+
+/*
+	Transformaciones Figuras */
+
+
+	//glew include
 #include <GL/glew.h>
 
 //std includes
@@ -11,6 +17,8 @@
 // program include
 #include "Headers/TimeManager.h"
 #include "Headers/Shader.h"
+////Includes 
+
 
 //GLM include
 #define GLM_FORCE_RADIANS

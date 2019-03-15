@@ -15,6 +15,7 @@
 // Shaders code
 const GLchar* vertexShaderSource = { "#version 400\n"
 
+//ahora recibe una posicion y un color
 "layout(location=0) in vec3 position;\n"
 "layout(location=1) in vec3 color;\n"
 "out vec3 ourColor;\n"
@@ -34,12 +35,19 @@ const GLchar* fragmentShaderSource = { "#version 400\n"
 "  out_Color = vec4(ourColor, 1.0);\n"
 "}\n" };
 
+<<<<<<< HEAD
 
 bool render1 = true;
 
 GLuint VBO, VAO, VBO2, VAO2;
 
 
+=======
+bool render1 = true;
+
+// para instanciar otra geometrias se añaden VBO y VAO
+GLuint VBO, VAO,VBO2,VAO2;
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 GLint vertexShader, fragmentShader, shaderProgram;
 
 typedef struct {
@@ -158,6 +166,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	Vertex vertices[] =
 	{
+<<<<<<< HEAD
 		//Cuerpo de la casa
 		{ { -0.4f, 0.4f, 0.0f },	{ 0.98f, 0.98f, 0.82f } },
 		{ { 0.4f, -0.4f, 0.0f },	{ 0.98f, 0.98f, 0.82f } },
@@ -225,10 +234,254 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		{ { -0.25f, -0.05f, 0.0f },		{ 0.64f, 0.16f, 0.16f } },
 		{ { -0.15f, -0.05f, 0.0f },		{ 0.64f, 0.16f, 0.16f } },
 		{ { -0.15f,  -0.4f, 0.0f },	{ 0.64f, 0.16f, 0.16f } },
+=======
+		//para cambiar la posicion y el color
+
+		//barda superior
+
+		{ {-1.0f, -0.3529f, 0.0f } ,{0.541, 0.227, 0.039} },
+		{ { -1.0f, -0.3823f, 0.0f } ,{0.541, 0.227, 0.039} },
+		{ { 1.0f,  -0.3529f, 0.0f } ,{0.541, 0.227, 0.039} },
+
+		{ {1.0f,  -0.3529f, 0.0f } ,{0.541, 0.227, 0.039 } },
+		{ { -1.0f, -0.3823f, 0.0f } ,{ 0.541, 0.227, 0.039} },
+		{ { 1.0f, -0.3823f, 0.0f } ,{ 0.541, 0.227, 0.039 } },
+
+
+		//primeros dos para la base de la casa (1)
+		{ {-0.4117f, 0.0588f, 0.0f } ,{ 0.921f, 0.976f, 0.972f } },
+		{ { -0.4117f, -0.6470f, 0.0f } ,{ 0.921f, 0.976f, 0.972f } },
+		{ { 0.4117f,  -0.6470f, 0.0f } ,{ 0.921f, 0.976, 0.972f } },
+
+		{ {0.4117f, -0.6470f, 0.0f } ,{ 0.921f, 0.976f, 0.972f } },
+		{ { 0.4117f, 0.0588f, 0.0f } ,{ 0.921f, 0.976f, 0.972f } },
+		{ { -0.4117f,0.0588f, 0.0f } ,{ 0.921f, 0.976f, 0.972f } },
+
+		//piso
+
+		{ {-1.0f, -0.6470f, 0.0f } ,{0.541, 0.227, 0.039} },
+		{ { -1.0f, -0.6764f, 0.0f } ,{0.541, 0.227, 0.039} },
+		{ { 1.0f,  -0.6470f, 0.0f } ,{0.541, 0.227, 0.039} },
+
+		{ {1.0f,  -0.6470f, 0.0f } ,{0.541, 0.227, 0.039 } },
+		{ { -1.0f, -0.6764f, 0.0f } ,{ 0.541, 0.227, 0.039} },
+		{ { 1.0f, -0.6764f, 0.0f } ,{ 0.541, 0.227, 0.039 } },
+
+		//(2)
+
+		{ {-0.4117f, 0.1470f, 0.0f } ,{0.968, 0.768, 0.294 } },
+		{ { -0.4117f, 0.0588f, 0.0f } ,{ 00.968, 0.768, 0.294} },
+		{ { 0.4117f,  0.0588f, 0.0f } ,{0.968, 0.768, 0.294} },
+
+		{ {0.4117f, 0.0588f, 0.0f } ,{ 0.968, 0.768, 0.294f} },
+		{ { 0.4117f, 0.1470f, 0.0f } ,{ 0.968, 0.768, 0.294} },
+		{ { -0.4117f,0.1470f, 0.0f } ,{ 0.968, 0.768, 0.294} },
+		
+		//(3)
+		{ {-0.4117f, 0.1470f, 0.0f } ,{ 0.898, 0.643, 0.043 } },
+		{ { 0.4117f, 0.1470f, 0.0f } ,{ 0.898, 0.643, 0.043} },
+		{ { 0.0f,  0.4705f, 0.0f } ,{0.898, 0.643, 0.043} },
+
+		//(4)
+
+		{ {-0.2941f, -0.0588f, 0.0f } ,{ 0.517, 0.266, 0.141 } },
+		{ { -0.2941f,-0.6470f, 0.0f } ,{ 0.517, 0.266, 0.141} },
+		{ { 0.0f,-0.6470f, 0.0f } ,{0.517, 0.266, 0.141 } },
+
+		{ {0.0f,-0.6470f, 0.0f } ,{ 0.517, 0.266, 0.141} },
+		{ { 0.0f, -0.0588f, 0.0f } ,{0.517, 0.266, 0.141} },
+		{ { -0.2941f,-0.0588f, 0.0f } ,{ 0.517, 0.266, 0.141 } },
+
+		//(5)
+
+		{ {0.0882f, -0.0882f, 0.0f } ,{0.968, 0.768, 0.294} },
+		{ { 0.0882f,-0.4117f, 0.0f } ,{ 0.968, 0.768, 0.294} },
+		{ { 0.3235f,-0.4117f, 0.0f } ,{0.968, 0.768, 0.294} },
+
+		{ {0.3235f,-0.4117f, 0.0f } ,{ 0.968, 0.768, 0.294} },
+		{ { 0.3235f, -0.0882f, 0.0f } ,{0.968, 0.768, 0.294} },
+		{ { 0.0882f, -0.0882f, 0.0f } ,{0.968, 0.768, 0.294 } },
+
+		//(6)
+
+		{ {0.0588f, -0.4117f, 0.0f } ,{ 0.925, 0.850, 0.858} },
+		{ { 0.0588f,-0.4705f, 0.0f } ,{0.925, 0.850, 0.858} },
+		{ { 0.3529f,-0.4705f, 0.0f } ,{0.925, 0.850, 0.858} },
+
+		{ {0.3529f,-0.4705f, 0.0f} ,{ 0.925, 0.850, 0.858} },
+		{ { 0.3529f, -0.4117f, 0.0f } ,{0.925, 0.850, 0.858} },
+		{ { 0.0588f, -0.4117f, 0.0f } ,{0.925, 0.850, 0.858 } },
+
+		//(7)
+
+		{ {-0.0588f, 0.3529f, 0.0f } ,{0.925, 0.850, 0.858} },
+		{ { -0.0588f,0.2058f, 0.0f } ,{0.925, 0.850, 0.858} },
+		{ { 0.0588f,0.2058f, 0.0f } ,{0.925, 0.850, 0.858} },
+
+		{ {0.0588f,0.2058f, 0.0f } ,{ 0.925, 0.850, 0.858} },
+		{ { 0.0588f, 0.3529f, 0.0f } ,{0.925, 0.850, 0.858} },
+		{ { -0.0588f, 0.3529f, 0.0f } ,{0.925, 0.850, 0.858 } },
+	
+		//(8)
+		{ {0.2941f, 0.2794f, 0.0f } ,{0.984, 0.317, 0.376} },
+		{ { 0.2941f, 0.3823f, 0.0f } ,{0.984, 0.317, 0.376} },
+		{ { 0.1764f,  0.3823f, 0.0f } ,{0.984, 0.317, 0.376} },
+
+		//(9)
+
+		{ {0.2941f,0.3823f, 0.0f } ,{0.984, 0.317, 0.376} },
+		{ {0.2941f,0.4117f, 0.0f } ,{0.984, 0.317, 0.376} },
+		{ {0.1741f,0.4117f, 0.0f } ,{0.984, 0.317, 0.376} },
+
+		{ {0.1741f,0.4117f, 0.0f } ,{0.984, 0.317, 0.376} },
+		{ {0.1741f,0.3823f, 0.0f } ,{0.984, 0.317, 0.376} },
+		{ {0.2941f,0.3823f, 0.0f } ,{0.984, 0.317, 0.376} },
+
+		//(10)
+
+		{ {0.3235f, 0.4117f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { 0.3235f,0.4411f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { 0.1470f,0.4411f, 0.0f } ,{0.850, 0.031, 0.105} },
+
+		{ {0.1470f,0.4411f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { 0.1470f, 0.4117f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { 0.3235f, 0.4117f, 0.0f } ,{0.850, 0.031, 0.105} },
+
+		//(11)
+
+		{ {0.4411f, 0.1176f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { 0.5f,0.1176f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { 0.0f,0.5294f, 0.0f } ,{0.850, 0.031, 0.105} },
+
+		{ {0.0f,0.5294f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { 0.0f,0.4705f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { 0.4411f,0.1176f, 0.0f } ,{0.850, 0.031, 0.105} },
+
+		//(12)
+
+		{ {-0.4411f, 0.1176f, 0.0f }, { 0.850, 0.031, 0.105 } },
+		{ { 0.0f,0.5294f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ {-0.5f,0.1176f, 0.0f} ,{0.850, 0.031, 0.105} },
+
+		{ {0.0f,0.5294f, 0.0f } ,{0.850, 0.031, 0.105} },
+		{ { -0.4411f,0.1176f, 0.0f} ,{0.850, 0.031, 0.105} },
+		{ { 0.0f,0.4705f, 0.0f  } ,{0.850, 0.031, 0.105} },
+
+		//(13)
+
+		{ {0.0441f, 0.2205f, 0.0f }, {0.050, 0.356, 0.890} },
+		{ { -0.0441f,0.3382f, 0.0f } ,{0.050, 0.356, 0.890} },
+		{ {-0.0441f,0.2205f, 0.0f} ,{0.050, 0.356, 0.890} },
+
+		{ {0.0441f,0.2205f, 0.0f } ,{0.050, 0.356, 0.890} },
+		{ { 0.0441f,0.3382f, 0.0f} ,{0.050, 0.356, 0.890} },
+		{ {-0.0441f,0.3382f, 0.0f} ,{0.050, 0.356, 0.890} },
+			
+		//(14)
+
+		{ {-0.0294f,-0.6176f, 0.0f }, { 0.968, 0.768, 0.294 } },
+		{ { -0.2647f,-0.0882f , 0.0f } ,{0.968, 0.768, 0.294 } },
+		{ {-0.2647f,-0.6176f, 0.0f} ,{0.968, 0.768, 0.294 } },
+
+		{ {-0.0294f,-0.6176f, 0.0f } ,{0.968, 0.768, 0.294 } },
+		{ { -0.0294f,-0.0882f, 0.0f} ,{0.968, 0.768, 0.294 } },
+		{ { -0.2647f,-0.0882f, 0.0f  } ,{0.968, 0.768, 0.294 } },
+
+			//(15)
+
+		{ {0.2941f, -0.157f, 0.0f }, { 0.050, 0.356, 0.890 } },
+		{ { 0.2941f,-0.1029f , 0.0f } ,{0.050, 0.356, 0.890} },
+		{ {0.1176f,-0.1029f, 0.0f} ,{0.050, 0.356, 0.890} },
+
+		{ {0.1176f,-0.1029f, 0.0f } ,{0.050, 0.356, 0.890} },
+		{ { 0.2941f,-0.157f, 0.0f} ,{0.050, 0.356, 0.890} },
+		{ { 0.1176f,-0.157f, 0.0} ,{0.050, 0.356, 0.890} },
+
+			//(16)
+
+		{ {0.1176f, -0.1764f, 0.0f }, { 0.050, 0.356, 0.890 } },
+		{ { 0.1176f,-0.3823f , 0.0f } ,{0.050, 0.356, 0.890 } },
+		{ {0.1911f,-0.3823f, 0.0f} ,{0.050, 0.356, 0.890} },
+
+		{ {0.1911,-0.3823f, 0.0f } ,{0.050, 0.356, 0.890} },
+		{ { 0.1911f,-0.1764f, 0.0f} ,{0.050, 0.356, 0.890} },
+		{ { 0.1176f,-0.1764f, 0.0f  } ,{0.050, 0.356, 0.890} },
+
+		//(17)
+
+		{ {0.2205f, -0.1764f, 0.0f }, { 0.050, 0.356, 0.890 } },
+		{ { 0.2205f,-0.3823f , 0.0f } ,{0.050, 0.356, 0.890} },
+		{ {0.2941f,-0.3823f, 0.0f} ,{0.050, 0.356, 0.890} },
+
+		{ {0.2941f,-0.3823f, 0.0f } ,{0.050, 0.356, 0.890} },
+		{ { 0.2941f,-0.1764f, 0.0f} ,{0.050, 0.356, 0.890} },
+		{ { 0.2205f,-0.1764f, 0.0f  } ,{0.050, 0.356, 0.890} },
+
+
+		//tablas derecha 1
+		
+		{ {0.5294f, -0.3235f, 0.0f }, {0.839, 0.341, 0.039 } },
+		{ { 0.5294f,-0.6470f , 0.0f } ,{0.839, 0.341, 0.039} },
+		{ {0.6470f,-0.6470f, 0.0f} ,{0.839, 0.341, 0.039} },
+
+		{ {0.6470f,-0.6470f, 0.0f } ,{0.839, 0.341, 0.039} },
+		{ { 0.6470f,-0.3235f, 0.0f} ,{0.839, 0.341, 0.039} },
+		{ { 0.5294f,-0.3235f, 0.0f  } ,{0.839, 0.341, 0.039} },
+
+		{ {0.5294f, -0.3235f, 0.0f }, { 0.839, 0.341, 0.039 } },
+		{ { 0.6470f,-0.3235f, 0.0f} ,{0.839, 0.341, 0.039} },
+		{ { 0.5882f,-0.2352f, 0.0f  } ,{0.839, 0.341, 0.039} },
+
+
+		//tablas derecha 2
+
+		{ {0.7647f, -0.3235f, 0.0f }, { 0.839, 0.341, 0.039 } },
+		{ { 0.7647f,-0.6470f , 0.0f } ,{0.839, 0.341, 0.039} },
+		{ {0.8823f,-0.6470f, 0.0f} ,{0.839, 0.341, 0.039} },
+
+		{ {0.8823f,-0.6470f, 0.0f } ,{0.839, 0.341, 0.039} },
+		{ { 0.8823f,-0.3235f, 0.0f} ,{0.839, 0.341, 0.039} },
+		{ { 0.7647f,-0.3235f, 0.0f  } ,{0.839, 0.341, 0.039} },
+
+		{ {0.7647f, -0.3235f, 0.0f }, { 0.839, 0.341, 0.039 } },
+		{ { 0.8823f,-0.3235f, 0.0f} ,{0.839, 0.341, 0.039} },
+		{ { 0.8235f,-0.2352f, 0.0f  } ,{0.839, 0.341, 0.039} },
+
+			//tablas izquierda 3
+
+		{ {-0.5294f, -0.3235f, 0.0f }, { 0.839, 0.341, 0.039 } },
+		{ { -0.5294f,-0.6470f , 0.0f } ,{0.839, 0.341, 0.039} },
+		{ {-0.6470f,-0.6470f, 0.0f} ,{0.839, 0.341, 0.039} },
+
+		{ {-0.6470f,-0.6470f, 0.0f } ,{0.839, 0.341, 0.039} },
+		{ { -0.6470f,-0.3235f, 0.0f} ,{0.839, 0.341, 0.039} },
+		{ { -0.5294f,-0.3235f, 0.0f  } ,{0.839, 0.341, 0.039} },
+
+		{ {-0.5294f, -0.3235f, 0.0f }, { 0.839, 0.341, 0.039 } },
+		{ { -0.6470f,-0.3235f, 0.0f} ,{0.839, 0.341, 0.039} },
+		{ { -0.5882f,-0.2352f, 0.0f  } ,{0.839, 0.341, 0.039} },
+
+
+			//tablas izquierda 4
+
+		{ {-0.7647f, -0.3235f, 0.0f }, { 0.839, 0.341, 0.039 } },
+		{ { -0.7647f,-0.6470f , 0.0f } ,{0.839, 0.341, 0.039} },
+		{ {-0.8823f,-0.6470f, 0.0f} ,{0.839, 0.341, 0.039} },
+
+		{ {-0.8823f,-0.6470f, 0.0f } ,{0.839, 0.341, 0.039} },
+		{ {- 0.8823f,-0.3235f, 0.0f} ,{0.839, 0.341, 0.039} },
+		{ { -0.7647f,-0.3235f, 0.0f  } ,{0.839, 0.341, 0.039} },
+
+		{ {-0.7647f, -0.3235f, 0.0f }, { 0.839, 0.341, 0.039 } },
+		{ {- 0.8823f,-0.3235f, 0.0f} ,{0.839, 0.341, 0.039} },
+		{ { -0.8235f,-0.2352f, 0.0f  } ,{0.839, 0.341, 0.039} }
+
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 	};
 
 	Vertex vertices2[] =
 	{
+<<<<<<< HEAD
 		//Punta superior
 		{ { 0.0f, 0.0f, 0.0f },		{ 0.64f, 0.16f, 0.16f } },
 		{ { 0.2f, 0.6f, 0.0f },		{ 0.64f, 0.16f, 0.16f } },
@@ -265,6 +518,44 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		{ { -0.6f, 0.2f, 0.0f },	{ 0.8f, 0.52f, 0.24f } },
 		{ { -0.6f, -0.2f, 0.0f },	{ 0.8f, 0.52f, 0.24f } },
 
+=======
+		//para cambiar la posicion y el color
+		//1 y 2
+		{ {0.0f, 0.0f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.1764f, 0.5f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { -0.1764f,  0.5f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		
+		{ {0.1764f, 0.5f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.0f, 0.6470f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { -0.1764f,  0.5f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+
+		//3 y 4
+		{ {0.0f, 0.0f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { -0.1764f,  -0.5f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.1764f,  -0.5f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+
+		{ {-0.1764f, -0.5f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.0f, -0.6470f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.1764f,  -0.5f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+
+		//5 y 6
+		{ {0.0f, 0.0f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ {  -0.5f,  0.1764f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { -0.5f,  -0.1764f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+
+		{ {-0.5f, 0.1764f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { -0.6470f, 0.0f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { -0.5f,  -0.1764f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+
+		//7 y 8
+		{ {0.0f, 0.0f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.5f, -0.1764f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.5f,  0.1764f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+
+		{ {0.5f, -0.1764f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.6470f, 0.0f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } },
+		{ { 0.5f,  0.1764f, 0.0f } ,{ 1.0f, 1.0f, 1.0f } }
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 
 	};
 
@@ -278,16 +569,22 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	std::cout << "Buffer Size:" << bufferSize << std::endl;
 	std::cout << "Vertex Size:" << vertexSize << std::endl;
 	std::cout << "Buffer size:" << rgbOffset << std::endl;
+<<<<<<< HEAD
 
 	//Esto es para el primer triangulo
+=======
+	
+	//para el primer triangulo
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 	glGenBuffers(1, &VBO);
 
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
+	//
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, bufferSize, vertices, GL_STATIC_DRAW);
-
+	//el cero y el uno debe corresponder con los cero y uno de la linea 18 y 19 (posicion y color)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexSize, 0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexSize,
 		(GLvoid*)rgbOffset);
@@ -298,7 +595,11 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+<<<<<<< HEAD
 	//Esto es para el segundo triangulo
+=======
+	//para el segundo triangulo, se "copia" el siguiente codigo cambiando nombres de variables
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 
 	const size_t bufferSize2 = sizeof(vertices2);
 	const size_t vertexSize2 = sizeof(vertices2[0]);
@@ -307,11 +608,16 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	std::cout << "Buffer Size:" << bufferSize2 << std::endl;
 	std::cout << "Vertex Size:" << vertexSize2 << std::endl;
 	std::cout << "Buffer size:" << rgbOffset2 << std::endl;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 	glGenBuffers(1, &VBO2);
 
 	glGenVertexArrays(1, &VAO2);
 	glBindVertexArray(VAO2);
 
+<<<<<<< HEAD
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
 	glBufferData(GL_ARRAY_BUFFER, bufferSize, vertices2, GL_STATIC_DRAW);
@@ -319,12 +625,22 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexSize2, 0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexSize2,
 		(GLvoid*)rgbOffset);
+=======
+	//
+	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
+	glBufferData(GL_ARRAY_BUFFER, bufferSize2, vertices2, GL_STATIC_DRAW);
+	//el cero y el uno debe corresponder con los cero y uno de la linea 18 y 19 (posicion y color)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexSize2, 0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexSize2,
+		(GLvoid*)rgbOffset2);
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+<<<<<<< HEAD
 
 
 
@@ -332,6 +648,12 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 }
 
 
+=======
+}
+
+
+
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 void destroyWindow() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
@@ -371,12 +693,22 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+<<<<<<< HEAD
 		case GLFW_KEY_F:
 			render1 = false;
 			break;
 		case GLFW_KEY_A:
 			render1 = true;
 			break;
+=======
+		//para cambiar entre imagenes
+		case GLFW_KEY_F:
+			render1 = true;
+			break;
+		case GLFW_KEY_S:
+			render1 = false;
+			break;
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		}
 	}
 }
@@ -422,6 +754,7 @@ void applicationLoop() {
 
 		glUseProgram(shaderProgram);
 
+<<<<<<< HEAD
 		if (render1)
 		{
 			glBindVertexArray(VAO);
@@ -434,6 +767,20 @@ void applicationLoop() {
 			glBindVertexArray(VAO2);
 			glDrawArrays(GL_TRIANGLES, 0, 24);
 		}
+=======
+		//if creado para cambiar entre las 2 figuras creadas
+		if (render1){
+			glBindVertexArray(VAO);
+			//si queremos dibujar mas triangulos debemos de cambiar el tres por el numero de vertices
+			glDrawArrays(GL_TRIANGLES, 0, 144);
+
+		}
+		else {
+			glBindVertexArray(VAO2);
+			glDrawArrays(GL_TRIANGLES, 0, 24);
+		}
+	
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);

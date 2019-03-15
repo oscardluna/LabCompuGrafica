@@ -255,9 +255,12 @@ void applicationLoop() {
 		//Matriz de proyección
 
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)screenWidth / screenHeight, 0.01f, 100.0f);
+<<<<<<< HEAD
 		//De la cosecha. Matriz de proyección
 
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float) screenWidth/screenHeight, 0.01f, 100.0f);
+=======
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		GLuint locProj = shader.getUniformLocation("projection");
 		glUniformMatrix4fv(locProj, 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -269,9 +272,12 @@ void applicationLoop() {
 		//lera C
 		//Primer cubo
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(-3.0, 4.0, -4.0));
+<<<<<<< HEAD
 
 		/* P R I M E R  C U B I T O */
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0, 4.0, -4.0));	
+=======
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		GLuint locModel = shader.getUniformLocation("model");
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -324,6 +330,7 @@ void applicationLoop() {
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 		//Segundo cubo
+<<<<<<< HEAD
 		/* S E G U N D O  C U B I T O */
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-5.0f, 4.0f, -4.0f));	
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -366,6 +373,8 @@ void applicationLoop() {
 
 
 		/*	G	*/
+=======
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 4.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -386,6 +395,7 @@ void applicationLoop() {
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
 		//Sexto cubo
+<<<<<<< HEAD
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 4.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -402,6 +412,8 @@ void applicationLoop() {
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
+=======
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 1.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -420,7 +432,11 @@ void applicationLoop() {
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(1.5f, 1.5f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		//10 cubo
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 2.5f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -437,8 +453,13 @@ void applicationLoop() {
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f, 4.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
+<<<<<<< HEAD
 
 
+=======
+		
+		
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		//Segundo cubo
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 4.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -473,7 +494,11 @@ void applicationLoop() {
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f, 1.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		//9 cubo
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 2.5f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -487,6 +512,7 @@ void applicationLoop() {
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
 		//Segundo cubo
+<<<<<<< HEAD
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 2.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -558,6 +584,8 @@ void applicationLoop() {
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
 		/*	I	*/
+=======
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, -1.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -583,6 +611,7 @@ void applicationLoop() {
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
 		//Septimo cubo
+<<<<<<< HEAD
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-6.0f, -1.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -595,6 +624,8 @@ void applicationLoop() {
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
+=======
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-5.0f, -4.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -658,6 +689,7 @@ void applicationLoop() {
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
 		//Segundo cubo
+<<<<<<< HEAD
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-6.0f, -4.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -706,6 +738,8 @@ void applicationLoop() {
 
 
 		/*	C	*/
+=======
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, -1.0f, -4.0f));
 		glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
@@ -746,6 +780,7 @@ void applicationLoop() {
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
 		//------------------------------------------------------------------------------------------
+<<<<<<< HEAD
 		glBindVertexArray(0);
 
 
@@ -781,6 +816,14 @@ void applicationLoop() {
 		glBindVertexArray(0);
 
 		//De la cosecha
+=======
+		glBindVertexArray(0);
+
+		
+		
+		
+		
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 
 		shader.turnOff();
 

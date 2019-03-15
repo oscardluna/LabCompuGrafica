@@ -1,4 +1,13 @@
-//glew include
+
+
+
+
+
+/*
+ Modelado Primitivas */
+
+
+ //glew include
 #include <GL/glew.h>
 
 //std includes
@@ -12,10 +21,16 @@
 #include "Headers/TimeManager.h"
 #include "Headers/Shader.h"
 
-/*
-Sphere sphere(20, 20);
-Cylinder cylinder(20, 20, 0.5, 0.5);
-Box box;*/
+//
+#include "Headers/Sphere.h"
+#include "Headers/Cylinder.h"
+#include "Headers/Box.h"
+
+/* El tercer parametro es el radio*/
+Sphere sphere(10, 10, 2.0);
+/* Cortes verticales y transversalaes*/
+Cylinder cylinder(5, 20, 0.2, 0.5);
+Box box;
 
 //GLM include
 #define GLM_FORCE_RADIANS
@@ -99,12 +114,16 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glEnable(GL_DEPTH_TEST);
 
 	shader.initialize("../../Shaders/transformaciones.vs", "../../Shaders/transformaciones.fs");
-	
-	/*
+
+	/* Inicialización de la esfera*/
 	sphere.init();
+	/* Se setea el shader */
 	sphere.setShader(&shader);
+	/* Se asigna un color */
 	sphere.setColor(glm::vec3(0.3, 0.3, 1.0));
 
+
+	/* Se realizan lo mismo que la esfera */
 	cylinder.init();
 	cylinder.setShader(&shader);
 	cylinder.setColor(glm::vec3(0.8, 0.3, 1.0));
@@ -112,7 +131,6 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	box.init();
 	box.setShader(&shader);
 	box.setColor(glm::vec3(0.2, 0.8, 0.4));
-	*/
 
 }
 
@@ -124,11 +142,10 @@ void destroyWindow() {
 void destroy() {
 	destroyWindow();
 
-	/*
+	/* Destruye los objetos creados. Libera memoria */
 	shader.destroy();
 	sphere.destroy();
 	cylinder.destroy();
-	*/
 }
 
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
@@ -184,7 +201,7 @@ void applicationLoop() {
 
 	while (psi) {
 		psi = processInput(true);
-		
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
@@ -192,26 +209,32 @@ void applicationLoop() {
 			(float)screenWidth / screenWidth, 0.01f, 100.0f);
 		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -8.0f));
 
-		/*sphere.setProjectionMatrix(projection);
+		/* Setea la matriz de proyección*/
+		sphere.setProjectionMatrix(projection);
+		/* Setea la matriz de vista */
 		sphere.setViewMatrix(view);
-		sphere.setPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-		sphere.setScale(glm::vec3(1.0, 1.0, 1.0));
+		/* Colocamos el objeto en la posición deseada */
+		sphere.setPosition(glm::vec3(2.0f, 2.0f, -2.0f));
+		/* Se setea el tamaño del objeto*/
+		sphere.setScale(glm::vec3(0.1, 0.1, 0.1));
+		/* Se habilita que no sea solido el objeto*/
 		sphere.enableWireMode();
-		sphere.render();*/
+		/* Se renderiza el objeto */
+		sphere.render();
 
-		/*cylinder.setProjectionMatrix(projection);
+		cylinder.setProjectionMatrix(projection);
 		cylinder.setViewMatrix(view);
 		cylinder.setPosition(glm::vec3(0.0f, 0.0f, 1.0f));
 		cylinder.setScale(glm::vec3(1.0, 1.0, 1.0));
 		cylinder.enableWireMode();
-		cylinder.render();*/
+		cylinder.render();
 
-		/*box.setProjectionMatrix(projection);
+		box.setProjectionMatrix(projection);
 		box.setViewMatrix(view);
 		box.setPosition(glm::vec3(0.0f, 0.0f, 1.0f));
 		box.setScale(glm::vec3(1.0, 1.0, 1.0));
 		box.enableWireMode();
-		box.render();*/
+		box.render();
 
 		glfwSwapBuffers(window);
 	}
@@ -223,3 +246,6 @@ int main(int argc, char ** argv) {
 	destroy();
 	return 1;
 }
+
+
+

@@ -44,7 +44,7 @@ bool processInput(bool continueApplication = true);
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
-	
+
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		exit(-1);
@@ -201,7 +201,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int state, int mod) {
 	}
 }
 
-bool processInput(bool continueApplication){
+bool processInput(bool continueApplication) {
 	if (exitApp || glfwWindowShouldClose(window) != 0) {
 		return false;
 	}
@@ -218,7 +218,7 @@ void applicationLoop() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		
+
 		shader.turnOn();
 
 		// Update the uniform color
@@ -227,12 +227,16 @@ void applicationLoop() {
 		GLfloat redValue = (cos(timeValue) / 2);
 		GLfloat blueValue = (sin(timeValue) / 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		//el metodo getUniformLocation retorna el id de la variable de nombre globalColor
 		//esta variable es global y esta declarada en el shader de fragmento
 		GLint vertexColorLocation = shader.getUniformLocation("globalColor");
 		//una vez obtenido el id de la variable hay que enviarle el valor que deseamos que tome la variable globalColor
 		//al ser un vec4 hay que enviar 4 variables
 		//los metodos de tipo glUniform
+<<<<<<< HEAD
 		
 		//parametros: id varible uniform, seguido de los 4 valores flotantes
 =======
@@ -246,6 +250,10 @@ void applicationLoop() {
 		Recibe los parametros: id de la variable uniform, seguido de los 4 valores flotantes*/
 		
 >>>>>>> 517146ea66e6ffac2003ee833d831e454fafd539
+=======
+
+		//parametros: id varible uniform, seguido de los 4 valores flotantes
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		glUniform4f(vertexColorLocation, redValue, greenValue, blueValue, 1.0f);
 
 

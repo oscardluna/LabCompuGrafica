@@ -43,6 +43,10 @@ int lastMousePosY;
 
 double deltaTime;
 
+int proyeccion;
+double planoCer = 0.01;
+float degrees = 45.0;
+
 // Se definen todos las funciones.
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -121,7 +125,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	};
 
 	GLuint indices[] = {  // Note that we start from 0!
-		0, 1, 2, 
+		0, 1, 2,
 		0, 2, 3,
 		1, 4, 5,
 		1, 5, 2,
@@ -194,6 +198,7 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+<<<<<<< HEAD
 
 		case GLFW_KEY_P:
 			render1 = 1;
@@ -206,7 +211,34 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_O:
 			render1 = 3;
 			break;
+=======
+		
+		case GLFW_KEY_Q:
+			proyeccion = 1;
+			break;
+		case GLFW_KEY_W:
+			proyeccion = 2;
+			break;
+		case GLFW_KEY_E:
+			proyeccion = 0;
+			break;
+		case GLFW_KEY_UP:
+			planoCer += 0.0002;
+			break;
+		case GLFW_KEY_DOWN:
+			planoCer -= 0.0002;
+			break;
+		case GLFW_KEY_LEFT:
+			degrees+=1;
+			break;
+		case GLFW_KEY_RIGHT:
+			degrees-=1;
+			break;
+
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		}
+
+
 	}
 }
 
@@ -248,7 +280,7 @@ void applicationLoop() {
 	float fovy = 0;
 
 	glm::vec3 cubePositions[] =
-	{	glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-2.0f, -5.0f, -15.0f),
+	{ glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-2.0f, -5.0f, -15.0f),
 		glm::vec3(-1.5f, 2.2f, -2.5f), glm::vec3(1.8f, 1.0f, -12.3f),
 		glm::vec3(4.4f, -0.4f, -3.5f), glm::vec3(-6.7f, 3.0f, -7.5f),
 		glm::vec3(-4.3f, -3.0f, -2.5f), glm::vec3(3.5f, 8.0f, -2.5f),
@@ -267,20 +299,49 @@ void applicationLoop() {
 		GLint viewLoc = shader.getUniformLocation("view");
 		GLint projLoc = shader.getUniformLocation("projection");
 
+<<<<<<< HEAD
 		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -7.0f));
 <<<<<<< HEAD
+=======
+		glm::mat4 proy;
+
+		if (proyeccion == 1) {
+			proy = glm::ortho(-4.0, 4.0, -4.0, 4.0, 0.1, 100.0);
+			
+		}
+		else {
+			if (proyeccion == 2) {
+				proy = glm::frustum(-0.005, 0.005, -0.005, 0.005, 0.01, 100.0);
+				
+			}
+			else {
+				if (degrees>=0.0f||degrees<=360.0f)
+					proy=glm::perspective(glm::radians(45.0f), (float)(screenWidth / screenHeight), 0.01f, 100.0f);
+					
+			}
+		}
+		//glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -7.0f));
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		//glm::mat4 projection = glm::perspective(glm::radians(45.0f), 
 			//(float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 		//glm crea matriz de 4x4
 		//glm ortho crea una matriz de proyeccion ortogonal,
 		//los parametros:plano izq, pano derecho, plano abajo, plano arriba, plano cercano, plano lejano
 		//glm::mat4 projection = glm::ortho(-4.0, 4.0, -4.0, 4.0, 0.1, 100.0);
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 		//glm frustrum crea una matriz de proyeccion en perspectiva
 		//los parametros:plano izq, pano derecho, plano abajo, plano arriba, plano cercano, plano lejano
 		//glm::mat4 projection = glm::frustum(-0.005, 0.005, -0.005, 0.005, 0.01, 100.0);
 		//glm perspective crea una proyeccion en perspectiva que cambia respecto a las dimensiones de la ventana
+<<<<<<< HEAD
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f),(float)(screenWidth/screenHeight),0.01f,100.0f);
+=======
+//		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)(screenWidth / screenHeight), 0.01f, 100.0f);
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
 
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));

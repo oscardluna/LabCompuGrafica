@@ -1,7 +1,7 @@
 #version 330 core
 
-in vec3 our_color;
-out vec4 color;
+ in vec3 our_color;
+ out vec4 color;
 
 void main ()
 {
