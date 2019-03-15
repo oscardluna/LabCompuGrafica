@@ -218,7 +218,7 @@ void applicationLoop() {
 		/* Se setea el tamaño del objeto*/
 		sphere.setScale(glm::vec3(0.1, 0.1, 0.1));
 		/* Se habilita que no sea solido el objeto*/
-		//sphere.enableWireMode();
+		sphere.enableWireMode();
 		/* Se renderiza el objeto */
 		sphere.render();
 
@@ -233,7 +233,7 @@ void applicationLoop() {
 		box.setViewMatrix(view);
 		box.setPosition(glm::vec3(0.0f, 0.0f, 1.0f));
 		box.setScale(glm::vec3(1.0, 1.0, 1.0));
-		//box.enableWireMode();
+		box.enableWireMode();
 		box.render();
 
 		glfwSwapBuffers(window);

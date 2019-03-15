@@ -40,6 +40,10 @@ int lastMousePosY;
 
 double deltaTime;
 
+float camX = 0.03f;
+float camY = 0.0f;
+float camZ = 0.05f;
+
 // Se definen todos las funciones.
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -106,7 +110,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	sphere.init();
 	sphere.setShader(&shader);
-	sphere.setColor(glm::vec3(0.3, 0.3, 1.0));
+	sphere.setColor(glm::vec3(0.5, 0.1234, 0.0));
 
 	cylinder.init();
 	cylinder.setShader(&shader);
@@ -148,6 +152,26 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+
+		case GLFW_KEY_A:
+			camX = camX - 1;
+			break;
+		case GLFW_KEY_D:
+			camX = camX + 1;
+			break;
+		case GLFW_KEY_W:
+			camY = camY + 1;
+			break;
+		case GLFW_KEY_S:
+			camY = camY - 1;
+			break;
+		case GLFW_KEY_R:
+			camZ = camZ + 4;
+			break;
+		case GLFW_KEY_F:
+			camZ = camZ - 4;
+			break;
+
 		}
 	}
 }
@@ -196,7 +220,7 @@ void applicationLoop() {
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f),
 			(float)screenWidth / screenWidth, 0.01f, 100.0f);
 		//matriz de vista
-		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -8.0f));
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f+camX, 0.0f+camY, -8.0f+camZ));
 
 		//matriz con diagonal unitaria
 		//matriz dell cilindro del torso
