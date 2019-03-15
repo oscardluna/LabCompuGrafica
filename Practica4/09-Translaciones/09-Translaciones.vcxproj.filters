@@ -34,7 +34,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <None Include="..\..\Shaders\transformaciones.fs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Shaders\transformaciones.vs">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+=======
     <None Include="..\..\Shaders\transformaciones.fs" />
     <None Include="..\..\Shaders\transformaciones.vs" />
+>>>>>>> 8c7fcde33906025f7ff67ac99f45496a7fb6623b
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ bool processInput(bool continueApplication = true);
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
-
+	
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		exit(-1);
@@ -75,7 +75,7 @@ void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
 	glViewport(0, 0, widthRes, heightRes);
 }
 
-bool processInput(bool continueApplication) {
+bool processInput(bool continueApplication){
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS
 		|| glfwWindowShouldClose(window) != 0) {
 		return false;
