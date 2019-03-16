@@ -146,6 +146,7 @@ void destroy() {
 	shader.destroy();
 	sphere.destroy();
 	cylinder.destroy();
+	box.destroy();
 }
 
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
@@ -216,7 +217,7 @@ void applicationLoop() {
 		/* Colocamos el objeto en la posición deseada */
 		sphere.setPosition(glm::vec3(2.0f, 2.0f, -2.0f));
 		/* Se setea el tamaño del objeto*/
-		sphere.setScale(glm::vec3(0.1, 0.1, 0.1));
+		sphere.setScale(glm::vec3(0.5, 0.5, 0.5));
 		/* Se habilita que no sea solido el objeto*/
 		sphere.enableWireMode();
 		/* Se renderiza el objeto */
@@ -224,7 +225,7 @@ void applicationLoop() {
 
 		cylinder.setProjectionMatrix(projection);
 		cylinder.setViewMatrix(view);
-		cylinder.setPosition(glm::vec3(0.0f, 0.0f, 1.0f));
+		cylinder.setPosition(glm::vec3(-2.0f, 0.0f, 1.0f));
 		cylinder.setScale(glm::vec3(1.0, 1.0, 1.0));
 		cylinder.enableWireMode();
 		cylinder.render();
