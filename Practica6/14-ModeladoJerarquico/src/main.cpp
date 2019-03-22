@@ -45,7 +45,10 @@ bool exitApp = false;
 int lastMousePosX, offsetx;
 int lastMousePosY, offsety;
 
-float rot1 = 0.0f, rot2 = 0.0f, rot3 = 0.0f;
+float rot1 = 0.0f, rot2 = 0.0f, rot3 = 0.0f;	//hombro
+float rot4 = 0.0f, rot5 = 0.0f, rot6 = 0.0f;	//codo
+float rot7 = 0.0f, rot8 = 0.0f, rot9 = 0.0f;	//muñeca
+
 double deltaTime;
 
 // Se definen todos las funciones.
@@ -215,6 +218,22 @@ bool processInput(bool continueApplication) {
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 		rot3 += 0.05;
 
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+		rot4 += 0.05;
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+		rot5 += 0.05;
+	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
+		rot6 += 0.05;
+
+	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+		rot7 += 0.05;
+	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)
+		rot8 += 0.05;
+	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)
+		rot9 += 0.05;
+
+
+
 	offsetx = 0;
 	offsety = 0;
 
@@ -257,11 +276,56 @@ void applicationLoop() {
 		matrixs6 = glm::rotate(matrixs6, rot2, glm::vec3(0.0f, 1.0f, 0.0f));
 		matrixs6 = glm::rotate(matrixs6, rot3, glm::vec3(1.0f, 0.0f, 0.0f));
 
+		
+
 		//glm::mat4 matrix7 = glm::rotate(matrixs6, -0.2f, glm::vec3(0.0f, 0.0f, 1.0f));
 
 		glm::mat4 matrix7 = glm::translate(matrixs6, glm::vec3(0.25f, 0.0f, 0.0f));
 
 		glm::mat4 matrixs7 = glm::translate(matrix7, glm::vec3(0.3f, 0.0f, 0.0f));
+		
+		matrixs7 = glm::rotate(matrixs7, rot4, glm::vec3(0.0f, 0.0f, 1.0f));
+		matrixs7 = glm::rotate(matrixs7, rot5, glm::vec3(0.0f, 1.0f, 0.0f));
+		matrixs7 = glm::rotate(matrixs7, rot6, glm::vec3(1.0f, 0.0f, 0.0f));
+		
+		glm::mat4 matrix8 = glm::translate(matrixs7, glm::vec3(0.25f, 0.0f, 0.0f));
+		glm::mat4 matrixs8 = glm::translate(matrix8, glm::vec3(0.275f, 0.0f, 0.0f));
+
+		matrixs8 = glm::rotate(matrixs8, rot7, glm::vec3(0.0f, 0.0f, 1.0f));
+		matrixs8 = glm::rotate(matrixs8, rot8, glm::vec3(0.0f, 1.0f, 0.0f));
+		matrixs8 = glm::rotate(matrixs8, rot9, glm::vec3(1.0f, 0.0f, 0.0f));
+
+
+		glm::mat4 matrixb9 = glm::translate(matrixs8, glm::vec3(0.125f, 0.0f, 0.0f));
+
+
+		//matrixs7=muñeca izquierda
+		matrixs8 = glm::scale(matrixs8, glm::vec3(0.06f, 0.06f, 0.06f));
+		sphere.setProjectionMatrix(projection);
+		sphere.setViewMatrix(view);
+		sphere.enableWireMode();
+		sphere.setColor(glm::vec3(0.3, 0.3, 1.0));
+		sphere.render(matrixs8);
+
+		//mano
+		matrixb9 = glm::rotate(matrixb9, 1.5708f, glm::vec3(0.0f, 0.0f, 1.0f));
+		matrixb9 = glm::scale(matrixb9, glm::vec3(0.2, 0.2, 0.2f));
+		box.setProjectionMatrix(projection);
+		box.setViewMatrix(view);
+		//box.enableWireMode();
+		box.setColor(glm::vec3(0.6, 0.3, 1.0));
+		box.render(matrixb9);
+
+		//matrix8 = antebrazo izquierdo
+		matrix8 = glm::rotate(matrix8, 1.5708f, glm::vec3(0.0f, 0.0f, 1.0f));
+		matrix8 = glm::scale(matrix8, glm::vec3(0.15, 0.5, 0.15f));
+		cylinder.setProjectionMatrix(projection);
+		cylinder.setViewMatrix(view);
+		cylinder.enableWireMode();
+		cylinder.setColor(glm::vec3(0.3, 0.3, 1.0));
+		cylinder.render(matrix8);
+
+		//matrixs7=codo izquierdo
 		matrixs7 = glm::scale(matrixs7, glm::vec3(0.1f, 0.1f, 0.1f));
 		sphere.setProjectionMatrix(projection);
 		sphere.setViewMatrix(view);
@@ -269,14 +333,16 @@ void applicationLoop() {
 		sphere.setColor(glm::vec3(0.3, 0.3, 1.0));
 		sphere.render(matrixs7);
 
+		//matrix7 = brazo izquierdo
 		matrix7 = glm::rotate(matrix7, 1.5708f, glm::vec3(0.0f, 0.0f, 1.0f));
 		matrix7 = glm::scale(matrix7, glm::vec3(0.15, 0.5, 0.15f));
 		cylinder.setProjectionMatrix(projection);
 		cylinder.setViewMatrix(view);
 		cylinder.enableWireMode();
-		sphere.setColor(glm::vec3(0.3, 0.3, 1.0));
+		cylinder.setColor(glm::vec3(0.3, 0.3, 1.0));
 		cylinder.render(matrix7);
 
+		//matrixs6 = hombro izquierdo
 		matrixs6 = glm::scale(matrixs6, glm::vec3(0.1f, 0.1f, 0.1f));
 		sphere.setProjectionMatrix(projection);
 		sphere.setViewMatrix(view);
@@ -284,7 +350,7 @@ void applicationLoop() {
 		sphere.setColor(glm::vec3(0.8, 0.3, 1.0));
 		sphere.render(matrixs6);
 
-		//
+		// matrixs5 = cuello
 		matrixs5 = glm::scale(matrixs5, glm::vec3(0.1f, 0.1f, 0.1f));
 		sphere.setProjectionMatrix(projection);
 		sphere.setViewMatrix(view);
