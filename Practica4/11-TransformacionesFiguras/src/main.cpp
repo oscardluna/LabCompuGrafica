@@ -1,10 +1,10 @@
 
 
 /*
-	Transformaciones Figuras */
+Transformaciones Figuras */
 
 
-	//glew include
+//glew include
 #include <GL/glew.h>
 
 //std includes

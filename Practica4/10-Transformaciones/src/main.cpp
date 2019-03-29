@@ -27,57 +27,45 @@ struct Vertex {
 
 // This is for the render with index element
 Vertex vertices[] =
-<<<<<<< HEAD
-{
-	{ glm::vec3(-0.5f, -0.5f, 0.5f) , glm::vec3(0.0f, 1.0f, 1.0f) },
-{ glm::vec3(0.5f , -0.5f, 0.5f) , glm::vec3(0.0f, 1.0f, 1.0f) },
-{ glm::vec3(0.5f ,  0.5f, 0.5f) , glm::vec3(0.0f, 1.0f, 1.0f) },
-{ glm::vec3(-0.5f,  0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },
-{ glm::vec3(0.5f , -0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 0.0f) },
-{ glm::vec3(0.5f ,  0.5f, -0.5f), glm::vec3(1.0f, 0.0f, 1.0f) },
-{ glm::vec3(-0.5f , 0.5f, -0.5f) ,glm::vec3(0.0f, 0.0f, 1.0f) },
-{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.0f, 1.0f, 0.0f) },
-=======
 {	//frente														
 	{ glm::vec3(-0.5f, -0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },	//0
-	{ glm::vec3(0.5f , -0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },	//1
-	{ glm::vec3(0.5f ,  0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },	//2
-	{ glm::vec3(-0.5f,  0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },	//3
+{ glm::vec3(0.5f , -0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },	//1
+{ glm::vec3(0.5f ,  0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },	//2
+{ glm::vec3(-0.5f,  0.5f, 0.5f) , glm::vec3(1.0f, 0.0f, 0.0f) },	//3
 
-	//atras															
-	{ glm::vec3(0.5f , -0.5f, -0.5f), glm::vec3(0.952, 0.729, 0.086) },	//4
-	{ glm::vec3(0.5f ,  0.5f, -0.5f), glm::vec3(0.952, 0.729, 0.086) },	//5
-	{ glm::vec3(-0.5f , 0.5f, -0.5f) ,glm::vec3(0.952, 0.729, 0.086) },	//6
-	{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.952, 0.729, 0.086) },	//7
+																	//atras															
+{ glm::vec3(0.5f , -0.5f, -0.5f), glm::vec3(0.952, 0.729, 0.086) },	//4
+{ glm::vec3(0.5f ,  0.5f, -0.5f), glm::vec3(0.952, 0.729, 0.086) },	//5
+{ glm::vec3(-0.5f , 0.5f, -0.5f) ,glm::vec3(0.952, 0.729, 0.086) },	//6
+{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.952, 0.729, 0.086) },	//7
 
-	//arriba														
-	{ glm::vec3(0.5f , 0.5f, -0.5f), glm::vec3(0.956, 0.968, 0.113) },		//8
-	{ glm::vec3(-0.5f , 0.5f, -0.5f), glm::vec3(0.956, 0.968, 0.113) },	//9
-	{ glm::vec3(0.5f , 0.5f, 0.5f) ,glm::vec3(0.956, 0.968, 0.113) },		//10
-	{ glm::vec3(-0.5f , 0.5f, 0.5f),glm::vec3(0.956, 0.968, 0.113f) },		//11
+																	//arriba														
+{ glm::vec3(0.5f , 0.5f, -0.5f), glm::vec3(0.956, 0.968, 0.113) },		//8
+{ glm::vec3(-0.5f , 0.5f, -0.5f), glm::vec3(0.956, 0.968, 0.113) },	//9
+{ glm::vec3(0.5f , 0.5f, 0.5f) ,glm::vec3(0.956, 0.968, 0.113) },		//10
+{ glm::vec3(-0.5f , 0.5f, 0.5f),glm::vec3(0.956, 0.968, 0.113f) },		//11
 
-	//abajo											
-	{ glm::vec3(-0.5f , -0.5f, 0.5f), glm::vec3(0.356, 0.968, 0.113) },	//12
-	{ glm::vec3(0.5f ,  -0.5f, 0.5f), glm::vec3(0.356, 0.968, 0.113) },	//13
-	{ glm::vec3(0.5f , -0.5f, -0.5f) ,glm::vec3(0.356, 0.968, 0.113) },	//14
-	{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.356, 0.968, 0.113) },	//15
+																		//abajo											
+{ glm::vec3(-0.5f , -0.5f, 0.5f), glm::vec3(0.356, 0.968, 0.113) },	//12
+{ glm::vec3(0.5f ,  -0.5f, 0.5f), glm::vec3(0.356, 0.968, 0.113) },	//13
+{ glm::vec3(0.5f , -0.5f, -0.5f) ,glm::vec3(0.356, 0.968, 0.113) },	//14
+{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.356, 0.968, 0.113) },	//15
 
-	//izquierda										
-	{ glm::vec3(-0.5f , -0.5f, 0.5f), glm::vec3(0.113, 0.368, 0.968) },	//16
-	{ glm::vec3(-0.5f ,  0.5f, 0.5f), glm::vec3(0.113, 0.368, 0.968) },	//17
-	{ glm::vec3(-0.5f , 0.5f, -0.5f) ,glm::vec3(0.113, 0.368, 0.968) },	//18
-	{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.113, 0.368, 0.968) },	//19
+																	//izquierda										
+{ glm::vec3(-0.5f , -0.5f, 0.5f), glm::vec3(0.113, 0.368, 0.968) },	//16
+{ glm::vec3(-0.5f ,  0.5f, 0.5f), glm::vec3(0.113, 0.368, 0.968) },	//17
+{ glm::vec3(-0.5f , 0.5f, -0.5f) ,glm::vec3(0.113, 0.368, 0.968) },	//18
+{ glm::vec3(-0.5f , -0.5f, -0.5f),glm::vec3(0.113, 0.368, 0.968) },	//19
 
-	//derecha										
-	{ glm::vec3(0.5f , -0.5f, 0.5f), glm::vec3(0.709, 0.203, 0.717) },		//20
-	{ glm::vec3(0.5f ,  0.5f, 0.5f), glm::vec3(0.709, 0.203, 0.717) },		//21
-	{ glm::vec3(0.5f , -0.5f, -0.5f),glm::vec3(0.709, 0.203, 0.717) },		//22
-	{ glm::vec3(0.5f , 0.5f, -0.5f),glm::vec3(0.709, 0.203, 0.717) },		//23
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
+																	//derecha										
+{ glm::vec3(0.5f , -0.5f, 0.5f), glm::vec3(0.709, 0.203, 0.717) },		//20
+{ glm::vec3(0.5f ,  0.5f, 0.5f), glm::vec3(0.709, 0.203, 0.717) },		//21
+{ glm::vec3(0.5f , -0.5f, -0.5f),glm::vec3(0.709, 0.203, 0.717) },		//22
+{ glm::vec3(0.5f , 0.5f, -0.5f),glm::vec3(0.709, 0.203, 0.717) },		//23
 };
 
 GLuint indices[] = {  // Note that we start from 0!
-//frente
+					  //frente
 	0, 1, 2,
 	2, 3, 0,
 	//atras
@@ -280,13 +268,6 @@ void applicationLoop() {
 
 	glm::vec3 cubePositions[] = {
 		//posiciones del cubo
-<<<<<<< HEAD
-		glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-2.0f, -5.0f, -15.0f),
-		glm::vec3(-1.5f, 2.2f, -2.5f), glm::vec3(1.8f, 1.0f, -12.3f),
-		glm::vec3(4.4f, -0.4f, -3.5f), glm::vec3(-6.7f, 3.0f, -7.5f),
-		glm::vec3(-4.3f, -3.0f, -2.5f), glm::vec3(3.5f, 8.0f, -2.5f),
-		glm::vec3(-1.7f, -0.7f, -1.5f), glm::vec3(3.3f, 3.0f, -1.5f)
-=======
 		//humano
 		glm::vec3(-3.0f, 1.4f, -5.0f), //1
 		glm::vec3(-3.0f, 1.125f, -5.0f),	//2
@@ -302,16 +283,15 @@ void applicationLoop() {
 		glm::vec3(-2.2f, 0.2f, -5.0f),	//12
 		glm::vec3(-1.5f, 0.0f,-5.0f), //13
 		glm::vec3(-1.8f, 0.0f, -5.0f),	//14
-		//perro
+										//perro
 
-		glm::vec3(0.5f, 0.6f, -8.0f),	//15
-		glm::vec3(1.1f, 0.08f, -8.0f), //16
-		glm::vec3(0.45f, -0.6f,-8.0f),	//17
-		glm::vec3(1.75f, -0.6f,-8.0f), //18
-		glm::vec3(2.15f, 0.28f, -8.0f),	//19
-		glm::vec3(0.1f, 0.5f,-8.0f), //20
-		glm::vec3(0.65f, 0.95f, -8.0f),	//21
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
+										glm::vec3(0.5f, 0.6f, -8.0f),	//15
+										glm::vec3(1.1f, 0.08f, -8.0f), //16
+										glm::vec3(0.45f, -0.6f,-8.0f),	//17
+										glm::vec3(1.75f, -0.6f,-8.0f), //18
+										glm::vec3(2.15f, 0.28f, -8.0f),	//19
+										glm::vec3(0.1f, 0.5f,-8.0f), //20
+										glm::vec3(0.65f, 0.95f, -8.0f),	//21
 	};
 
 	while (psi) {
@@ -335,25 +315,18 @@ void applicationLoop() {
 		glBindVertexArray(VAO);
 		float scale = 1.0f;
 
-<<<<<<< HEAD
-		for (int i = 0; i < 10; i++) {
-=======
 		/*for (int i = 0; i < 10; i++) {
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
-			glm::mat4 model = glm::translate(glm::mat4(1.0f), cubePositions[i]);
-			model = glm::rotate(model, (float)i / 3.1416f, glm::vec3(1.0f, 0.3f, 0.0f));
-			model = glm::scale(model, glm::vec3(scale, scale, scale));
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-			// This is for the render with index element
-			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
-			scale += 0.2f;
+		glm::mat4 model = glm::translate(glm::mat4(1.0f), cubePositions[i]);
+		model = glm::rotate(model, (float)i / 3.1416f, glm::vec3(1.0f, 0.3f, 0.0f));
+		model = glm::scale(model, glm::vec3(scale, scale, scale));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		// This is for the render with index element
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
+		scale += 0.2f;
 
 		};
 		*/
 
-<<<<<<< HEAD
-
-=======
 		glm::mat4 model = glm::mat4(1.0f);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -370,7 +343,7 @@ void applicationLoop() {
 		model = glm::scale(model, glm::vec3(0.3f, 0.2f, 0.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
-		
+
 		//3
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, cubePositions[2]);
@@ -385,7 +358,6 @@ void applicationLoop() {
 		model = glm::scale(model, glm::vec3(0.9f, 0.2f, 0.6f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 
 		//5
 		model = glm::mat4(1.0f);
@@ -394,8 +366,6 @@ void applicationLoop() {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
-<<<<<<< HEAD
-=======
 		//6
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, cubePositions[5]);
@@ -522,7 +492,6 @@ void applicationLoop() {
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLuint *)0);
 
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 		//model = glm::mat4(1.0f);
 		//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 

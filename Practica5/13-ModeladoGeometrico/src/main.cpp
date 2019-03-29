@@ -220,7 +220,7 @@ void applicationLoop() {
 		glm::mat4 projection = glm::perspective(glm::radians(45.0f),
 			(float)screenWidth / screenWidth, 0.01f, 100.0f);
 		//matriz de vista
-		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f+camX, 0.0f+camY, -8.0f+camZ));
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f + camX, 0.0f + camY, -8.0f + camZ));
 
 		//matriz con diagonal unitaria
 		//matriz dell cilindro del torso
@@ -291,7 +291,7 @@ void applicationLoop() {
 		cylinder.setViewMatrix(view);
 		cylinder.enableWireMode();
 		cylinder.render(matrix6);
-		
+
 		//esfera hombro izquierdo
 		matrixs6 = glm::scale(matrixs6, glm::vec3(0.1f, 0.1f, 0.1f));
 		sphere.setProjectionMatrix(projection);
@@ -336,9 +336,9 @@ void applicationLoop() {
 		sphere.enableWireMode();
 		sphere.render(matrixs1);
 
-	
-		
-		
+
+
+
 		glm::mat4 matrix1 = glm::rotate(matrixs2, -0.2f, glm::vec3(0.0f, 0.0f, 1.0f));
 		matrix1 = glm::translate(matrix1, glm::vec3(0.0, -0.4, 0.0));
 
@@ -351,9 +351,9 @@ void applicationLoop() {
 		//dibujando un cilindro y trasladando desde la linea 247
 		glm::mat4 matrix2 = glm::translate(matrixs4, glm::vec3(0.0f, -0.3f, 0.0f));
 		glm::mat4 matrix5 = glm::translate(matrixs7, glm::vec3(0.0f, -0.3f, 0.0f));
-	
-		
-		
+
+
+
 
 
 		//pantorrilla derecha

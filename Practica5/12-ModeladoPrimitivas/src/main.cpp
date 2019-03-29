@@ -4,10 +4,10 @@
 
 
 /*
- Modelado Primitivas */
+Modelado Primitivas */
 
 
- //glew include
+//glew include
 #include <GL/glew.h>
 
 //std includes

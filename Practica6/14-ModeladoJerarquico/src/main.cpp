@@ -42,19 +42,13 @@ int screenHeight;
 GLFWwindow * window;
 
 bool exitApp = false;
-<<<<<<< HEAD
-int lastMousePosX,offsetx;
-int lastMousePosY,offsety;
-=======
 int lastMousePosX, offsetx;
 int lastMousePosY, offsety;
 
 float rot1 = 0.0f, rot2 = 0.0f, rot3 = 0.0f;	//hombro
 float rot4 = 0.0f, rot5 = 0.0f, rot6 = 0.0f;	//codo
 float rot7 = 0.0f, rot8 = 0.0f, rot9 = 0.0f;	//muñeca
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 
-float rot1 = 0.0f, rot2 = 0.0f, rot3 = 0.0f;
 double deltaTime;
 
 // Se definen todos las funciones.
@@ -202,11 +196,7 @@ bool processInput(bool continueApplication) {
 	TimeManager::Instance().CalculateFrameRate(false);
 	deltaTime = TimeManager::Instance().DeltaTime;
 	//para mover la camara con teclado
-<<<<<<< HEAD
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
-=======
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 		camera->moveFrontCamera(true, deltaTime);
 
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -218,11 +208,7 @@ bool processInput(bool continueApplication) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera->moveRightCamera(true, deltaTime);
 
-<<<<<<< HEAD
-	if (glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-=======
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 		camera->mouseMoveCamera(offsetx, offsety, deltaTime);
 
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
@@ -232,8 +218,6 @@ bool processInput(bool continueApplication) {
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 		rot3 += 0.05;
 
-<<<<<<< HEAD
-=======
 	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
 		rot4 += 0.05;
 	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
@@ -250,7 +234,6 @@ bool processInput(bool continueApplication) {
 
 
 
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 	offsetx = 0;
 	offsety = 0;
 
@@ -293,26 +276,18 @@ void applicationLoop() {
 		matrixs6 = glm::rotate(matrixs6, rot2, glm::vec3(0.0f, 1.0f, 0.0f));
 		matrixs6 = glm::rotate(matrixs6, rot3, glm::vec3(1.0f, 0.0f, 0.0f));
 
-<<<<<<< HEAD
-		//glm::mat4 matrix7 = glm::rotate(matrixs6, -0.2f, glm::vec3(0.0f, 0.0f, 1.0f));
-		
-		glm::mat4 matrix7 = glm::translate(matrixs6, glm::vec3(0.25f, 0.0f, 0.0f));
 
-		glm::mat4 matrixs7 = glm::translate(matrix7, glm::vec3(0.3f, 0.0f, 0.0f));
-		matrixs7 = glm::scale(matrixs7, glm::vec3(0.1f, 0.1f, 0.1f));
-=======
-		
 
 		//glm::mat4 matrix7 = glm::rotate(matrixs6, -0.2f, glm::vec3(0.0f, 0.0f, 1.0f));
 
 		glm::mat4 matrix7 = glm::translate(matrixs6, glm::vec3(0.25f, 0.0f, 0.0f));
 
 		glm::mat4 matrixs7 = glm::translate(matrix7, glm::vec3(0.3f, 0.0f, 0.0f));
-		
+
 		matrixs7 = glm::rotate(matrixs7, rot4, glm::vec3(0.0f, 0.0f, 1.0f));
 		matrixs7 = glm::rotate(matrixs7, rot5, glm::vec3(0.0f, 1.0f, 0.0f));
 		matrixs7 = glm::rotate(matrixs7, rot6, glm::vec3(1.0f, 0.0f, 0.0f));
-		
+
 		glm::mat4 matrix8 = glm::translate(matrixs7, glm::vec3(0.25f, 0.0f, 0.0f));
 		glm::mat4 matrixs8 = glm::translate(matrix8, glm::vec3(0.275f, 0.0f, 0.0f));
 
@@ -326,21 +301,10 @@ void applicationLoop() {
 
 		//matrixs7=muñeca izquierda
 		matrixs8 = glm::scale(matrixs8, glm::vec3(0.06f, 0.06f, 0.06f));
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 		sphere.setProjectionMatrix(projection);
 		sphere.setViewMatrix(view);
 		sphere.enableWireMode();
 		sphere.setColor(glm::vec3(0.3, 0.3, 1.0));
-<<<<<<< HEAD
-		sphere.render(matrixs7);
-
-		matrix7 = glm::rotate(matrix7, 1.5708f, glm::vec3(0.0f,0.0f,1.0f));
-		matrix7 = glm::scale(matrix7, glm::vec3(0.15, 0.5, 0.15f));
-		cylinder.setProjectionMatrix(projection);
-		cylinder.setViewMatrix(view);
-		cylinder.enableWireMode();
-		sphere.setColor(glm::vec3(0.3, 0.3, 1.0));
-=======
 		sphere.render(matrixs8);
 
 		//mano
@@ -376,7 +340,6 @@ void applicationLoop() {
 		cylinder.setViewMatrix(view);
 		cylinder.enableWireMode();
 		cylinder.setColor(glm::vec3(0.3, 0.3, 1.0));
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 		cylinder.render(matrix7);
 
 		//matrixs6 = hombro izquierdo
@@ -387,11 +350,7 @@ void applicationLoop() {
 		sphere.setColor(glm::vec3(0.8, 0.3, 1.0));
 		sphere.render(matrixs6);
 
-<<<<<<< HEAD
-		//
-=======
 		// matrixs5 = cuello
->>>>>>> 028fc5a448f8a5de41a5b71bd8c0b42ef614d3a7
 		matrixs5 = glm::scale(matrixs5, glm::vec3(0.1f, 0.1f, 0.1f));
 		sphere.setProjectionMatrix(projection);
 		sphere.setViewMatrix(view);
