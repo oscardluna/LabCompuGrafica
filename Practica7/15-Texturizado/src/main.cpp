@@ -303,7 +303,12 @@ void applicationLoop() {
 		cylinder.setProjectionMatrix(projection);
 		cylinder.setViewMatrix(view);
 		cylinder.setPosition(glm::vec3(-2.0f, 0.0f, -3.0f));
-		cylinder.render();
+		cylinder.render(0,cylinder.getSlices()*cylinder.getStacks()*2*3);		//contorno o parte lateral del cilindro
+		
+		//para cambiarle la textura a las tapas
+		glBindTexture(GL_TEXTURE_2D, textureID1);
+		cylinder.render(cylinder.getSlices()*cylinder.getStacks() * 2 * 3, cylinder.getSlices()*3);		//para la tapa superior
+		cylinder.render(cylinder.getSlices()*cylinder.getStacks() * 2 * 3+cylinder.getSlices() * 3,cylinder.getSlices() * 3);
 		//Descomentar
 		//no se utiliza ninguna textura
 		glBindTexture(GL_TEXTURE_2D, 0);
