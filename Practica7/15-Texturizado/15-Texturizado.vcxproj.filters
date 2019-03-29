@@ -79,8 +79,6 @@
     <None Include="..\..\Shaders\texturizado.fs">
       <Filter>Archivos de recursos</Filter>
     </None>
-    <None Include="..\..\Shaders\texturizado.vs">
-      <Filter>Archivos de recursos</Filter>
-    </None>
+    <None Include="..\..\Shaders\texturizado.vs" />
   </ItemGroup>
 </Project>
