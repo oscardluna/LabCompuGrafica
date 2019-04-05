@@ -258,7 +258,7 @@ void applicationLoop() {
 		if (angle > 2 * M_PI)
 			angle = 0.0;
 		else
-			angle += 0.001;
+			angle += 0.0005;
 
 		glm::mat4 lightModelmatrix = glm::rotate(cubeModelMatrix, angle, glm::vec3(0.0f, 1.0f, 0.0f));
 		lightModelmatrix = glm::translate(lightModelmatrix, glm::vec3(0.0f, 0.0f, -ratio));
@@ -268,6 +268,12 @@ void applicationLoop() {
 		glUniform3f(iluminacionShader.getUniformLocation("light.ambient"), 0.3, 0.3, 0.3);
 		glUniform3f(iluminacionShader.getUniformLocation("light.diffuse"), 0.4, 0.4, 0.4);
 		glUniform3f(iluminacionShader.getUniformLocation("light.specular"), 0.5, 0.3, 0.2);
+
+		glUniform3f(iluminacionShader.getUniformLocation("material.ambient"), 0.0215f, 0.1745f, 0.0215f);
+		glUniform3f(iluminacionShader.getUniformLocation("material.diffuse"), 0.07568f, 0.61424f, 0.07568f);
+		glUniform3f(iluminacionShader.getUniformLocation("material.specular"), 0.633f, 0.727811f, 0.633f);
+		glUniform1f(iluminacionShader.getUniformLocation("material.shininess"), 76.8f);
+
 		glUniform3fv(iluminacionShader.getUniformLocation("viewPos"), 1, glm::value_ptr(camera->getPosition()));
 		iluminacionShader.turnOff();
 
