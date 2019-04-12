@@ -31,7 +31,9 @@
 std::shared_ptr<FirstPersonCamera> camera(new FirstPersonCamera());
 
 Sphere sphere(20, 20);
+Sphere sphere2(20, 20);
 Cylinder cylinder(20, 20, 0.5, 0.5);
+Cylinder cylinder2(20, 20, 0.5, 0.5);
 Box box;
 
 Shader shaderColor;
@@ -53,14 +55,34 @@ GLenum types[6] = {
 	GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
 	GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 };
-
+//para cambiar el fondo de la textura
 std::string fileNames[6] = { 
-	"../../Textures/mp_bloodvalley/blood-valley_ft.tga",
+
+	"../../Textures/mp_vod/valley-of-the-dead_ft.tga",
+	"../../Textures/mp_vod/valley-of-the-dead_bk.tga",
+	"../../Textures/mp_vod/valley-of-the-dead_up.tga",
+	"../../Textures/mp_vod/valley-of-the-dead_dn.tga",
+	"../../Textures/mp_vod/valley-of-the-dead_rt.tga",
+	"../../Textures/mp_vod/valley-of-the-dead_lf.tga"
+	/*	"../../Textures/mp_crimmind/criminalmind_ft.tga",
+	"../../Textures/mp_crimmind/criminalmind_bk.tga",
+	"../../Textures/mp_crimmind/criminalmind_up.tga",
+	"../../Textures/mp_crimmind/criminalmind_dn.tga",
+	"../../Textures/mp_crimmind/criminalmind_rt.tga",
+	"../../Textures/mp_crimmind/criminalmind_lf.tga"*/
+
+/*	"../../Textures/jf_plague/plague_ft.tga",
+	"../../Textures/jf_plague/plague_bk.tga",
+	"../../Textures/jf_plague/plague_up.tga",
+	"../../Textures/jf_plague/plague_dn.tga",
+	"../../Textures/jf_plague/plague_rt.tga",
+	"../../Textures/jf_plague/plague_lf.tga"*/
+	/*"../../Textures/mp_bloodvalley/blood-valley_ft.tga",
 	"../../Textures/mp_bloodvalley/blood-valley_bk.tga",
 	"../../Textures/mp_bloodvalley/blood-valley_up.tga",
 	"../../Textures/mp_bloodvalley/blood-valley_dn.tga",
 	"../../Textures/mp_bloodvalley/blood-valley_rt.tga",
-	"../../Textures/mp_bloodvalley/blood-valley_lf.tga"
+	"../../Textures/mp_bloodvalley/blood-valley_lf.tga"*/
 };
 
 int screenWidth;
@@ -138,6 +160,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	shaderColor.initialize("../../Shaders/transformaciones.vs", "../../Shaders/transformaciones.fs");
 	shaderTexture.initialize("../../Shaders/texturizado_res.vs", "../../Shaders/texturizado_res.fs");
+	//renderiza el skybox
 	shaderCubeTexture.initialize("../../Shaders/cubeTexture.vs", "../../Shaders/cubeTexture.fs");
 	shaderMateriales.initialize("../../Shaders/iluminacion_materiales_res.vs", "../../Shaders/iluminacion_materiales_res.fs");
 	shaderDirectionLight.initialize("../../Shaders/typeLight.vs", "../../Shaders/directionalLight.fs");
@@ -145,7 +168,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	shaderSpotLight.initialize("../../Shaders/typeLight.vs", "../../Shaders/spotLight.fs");
 
 	sphere.init();
+	sphere2.init();
 	cylinder.init();
+	cylinder2.init();
 	box.init();
 
 	camera->setPosition(glm::vec3(0.0f, 0.0f, 0.4f));
@@ -250,6 +275,7 @@ void destroy() {
 	shaderPointLight.destroy();
 	shaderSpotLight.destroy();
 	sphere.destroy();
+	sphere2.destroy();
 	cylinder.destroy();
 	box.destroy();
 }
@@ -348,41 +374,50 @@ void applicationLoop() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		glBindTexture(GL_TEXTURE_2D, textureID2);
-		cylinder.setShader(&shaderMateriales);
-		cylinder.setProjectionMatrix(projection);
-		cylinder.setViewMatrix(view);
-		cylinder.setPosition(glm::vec3(0.0, 0.0, 0.0));
-		cylinder.setScale(glm::vec3(1.0, 1.0, 1.0));
+		sphere2.setShader(&shaderSpotLight);
+		sphere2.setProjectionMatrix(projection);
+		sphere2.setViewMatrix(view);
+		sphere2.setPosition(glm::vec3(0.0, 0.0, 0.0));
+		sphere2.setScale(glm::vec3(1.0, 1.0, 1.0));
 		// Iluminación
 		glm::mat4 lightModelmatrix = glm::rotate(cubeModelMatrix, angle, glm::vec3(0.0f, 1.0f, 0.0f));
 		lightModelmatrix = glm::translate(lightModelmatrix, glm::vec3(0.0f, 0.0f, -ratio));
-		shaderMateriales.turnOn();
-		//glUniform3fv(shaderMateriales.getUniformLocation("light.position"), 1, glm::value_ptr(glm::vec3(lightModelmatrix * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f))));
-		//glUniform3fv(shaderMateriales.getUniformLocation("light.direction"), 1, glm::value_ptr(glm::vec3(-0.3f, -1.0f, -0.2f)));
-		glUniform3fv(shaderMateriales.getUniformLocation("light.position"), 1, glm::value_ptr(camera->getPosition()));
-		glUniform3fv(shaderMateriales.getUniformLocation("light.direction"),1, glm::value_ptr(camera->getFront()));
-		glUniform3fv(shaderMateriales.getUniformLocation("viewPos"), 1, glm::value_ptr(camera->getPosition()));
-		glUniform3f(shaderMateriales.getUniformLocation("light.ambient"), 0.2, 0.2, 0.2);
-		glUniform3f(shaderMateriales.getUniformLocation("light.diffuse"), 0.2, 0.3, 0.6);
-		glUniform3f(shaderMateriales.getUniformLocation("light.specular"), 0.5, 0.3, 0.2);
-		glUniform3f(shaderMateriales.getUniformLocation("material.ambient"), 1.0, 0.2, 0.6);
-		glUniform3f(shaderMateriales.getUniformLocation("material.diffuse"), 0.4, 0.5, 0.8);
-		glUniform3f(shaderMateriales.getUniformLocation("material.specular"), 0.5, 0.3, 0.2);
-		glUniform1f(shaderMateriales.getUniformLocation("light.cutOff"), glm::cos(glm::radians(12.5f)));
-		glUniform1f(shaderMateriales.getUniformLocation("light.outerCutOff"), glm::cos(glm::radians(15.0f)));
-		glUniform1f(shaderMateriales.getUniformLocation("light.constant"), 1.0f);
-		glUniform1f(shaderMateriales.getUniformLocation("light.linear"), 0.14f);
-		glUniform1f(shaderMateriales.getUniformLocation("light.quadratics"), 0.07f);
-		glUniform1f(shaderMateriales.getUniformLocation("material.shininess"), 32.0);
-		cylinder.render();
-		shaderMateriales.turnOff();
+		shaderSpotLight.turnOn();
+		//glUniform3fv(shaderSpotLight.getUniformLocation("light.position"), 1, glm::value_ptr(glm::vec3(2.0,0.0f,-4.0)));
+		//glUniform3fv(shaderSpotLight.getUniformLocation("light.direction"), 1, glm::value_ptr(glm::vec3(-0.3f, -1.0f, -0.2f)));
+		glUniform3fv(shaderSpotLight.getUniformLocation("light.position"), 1, glm::value_ptr(camera->getPosition()));
+		glUniform3fv(shaderSpotLight.getUniformLocation("light.direction"),1, glm::value_ptr(camera->getFront()));
+		glUniform3fv(shaderSpotLight.getUniformLocation("viewPos"), 1, glm::value_ptr(camera->getPosition()));
+		glUniform3f(shaderSpotLight.getUniformLocation("light.ambient"), 0.2, 0.2, 0.2);
+		glUniform3f(shaderSpotLight.getUniformLocation("light.diffuse"), 0.2, 0.3, 0.6);
+		glUniform3f(shaderSpotLight.getUniformLocation("light.specular"), 0.5, 0.3, 0.2);
+		glUniform3f(shaderSpotLight.getUniformLocation("material.ambient"), 1.0, 0.2, 0.6);
+		glUniform3f(shaderSpotLight.getUniformLocation("material.diffuse"), 0.4, 0.5, 0.8);
+		glUniform3f(shaderSpotLight.getUniformLocation("material.specular"), 0.5, 0.3, 0.2);
+		glUniform1f(shaderSpotLight.getUniformLocation("light.cutOff"), glm::cos(glm::radians(5.5f)));
+		glUniform1f(shaderSpotLight.getUniformLocation("light.outerCutOff"), glm::cos(glm::radians(7.0f)));
+		glUniform1f(shaderSpotLight.getUniformLocation("light.constant"), 1.0f);
+		glUniform1f(shaderSpotLight.getUniformLocation("light.linear"), 0.7f);
+		glUniform1f(shaderSpotLight.getUniformLocation("light.quadratics"), 1.8f);
+		glUniform1f(shaderSpotLight.getUniformLocation("material.shininess"), 32.0);
+		sphere2.render();
+		sphere2.setPosition(glm::vec3(0.0, 0.0, -8.0));
+		sphere2.render();
+
+		cylinder2.setShader(&shaderSpotLight);
+		cylinder2.setProjectionMatrix(projection);
+		cylinder2.setViewMatrix(view);
+		cylinder2.setPosition(glm::vec3(2.0, 0.0, -3.0));
+		cylinder2.render();
+
+		shaderSpotLight.turnOff();
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		if (angle > 2 * M_PI)
 			angle = 0.0;
 		else
 			angle += 0.001;
-
+		//renderizado
 		sphere.setShader(&shaderColor);
 		sphere.setColor(glm::vec3(0.4f, 0.3f, 0.6f));
 		sphere.setProjectionMatrix(projection);
@@ -402,8 +437,10 @@ void applicationLoop() {
 		glCullFace(GL_FRONT);
 		glDepthFunc(GL_LEQUAL);
 		sphere.setShader(&shaderCubeTexture);
+
 		sphere.setProjectionMatrix(projection);
-		sphere.setViewMatrix(glm::mat4(glm::mat3(view)));
+//		sphere.setViewMatrix(glm::mat4(glm::mat3(view)));
+		sphere.setViewMatrix(view);		//para poder salir de la esfera skybox
 		sphere.setScale(glm::vec3(20.0f, 20.0f, 20.0f));
 		sphere.render();
 		glCullFace(oldCullFaceMode);
