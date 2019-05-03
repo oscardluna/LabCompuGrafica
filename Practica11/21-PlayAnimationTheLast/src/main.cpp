@@ -473,10 +473,12 @@ void applicationLoop() {
 	float rotationAirCraft = 0.0;
 	bool finishRotation = true;
 
+	//se obtiene los frames del brazo
 	std::vector<std::vector<glm::mat4>> keyFramesBrazo = getKeyFrames("../../animaciones/animationMano.txt");
-	int numPasosAnimBrazo = 200;
-	int numPasosAnimBrazoCurr = 0;
+	int numPasosAnimBrazo = 400;			 //numero de pasos para animar el brazo, para alcanzar del frame i-1 al frame i
+	int numPasosAnimBrazoCurr = 0;		//se va incrementando
 
+	//indices del arreglo keyFrameBrazo el actual y el siguiente
 	int indexKeyFrameBrazoCurr = 0;
 	int indexKeyFrameBrazoNext = 1;
 	float interpolation = 0.0;
@@ -602,15 +604,23 @@ void applicationLoop() {
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureID3);
-		if (keyFramesBrazo[indexKeyFrameBrazoCurr].size() == 7 && keyFramesBrazo[indexKeyFrameBrazoNext].size() == 7) {
+		if (keyFramesBrazo[indexKeyFrameBrazoCurr].size() == 7 && keyFramesBrazo[indexKeyFrameBrazoNext].size() == 7) {		//siempre +1 
 
-			firstQuat = glm::quat_cast(keyFramesBrazo[indexKeyFrameBrazoCurr][0]);
+			//matriz de rotacion actual
+			firstQuat = glm::quat_cast(keyFramesBrazo[indexKeyFrameBrazoCurr][0]); //[frame][matriz]
 			secondQuat = glm::quat_cast(keyFramesBrazo[indexKeyFrameBrazoNext][0]);
-			finalQuat = glm::slerp(firstQuat, secondQuat, interpolation);
+			finalQuat = glm::slerp(firstQuat, secondQuat, interpolation);		//slerp hace la interpolacion del quaternion (matriz de rotacion)
+			//se convierte el quaternion a una matriz de 4x4
 			interpoltaedMatrix = glm::mat4_cast(finalQuat);
+			//se obtiene la traslacion del frame i-1
 			transformComp1 = keyFramesBrazo[indexKeyFrameBrazoCurr][0] * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+			//se obtiene la traslacion del frame i
 			transformComp2 = keyFramesBrazo[indexKeyFrameBrazoNext][0] * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+			//se hace la interpolacion del frame i-1 y el frame i
+			//transformComp1 es el frame i-1
+			//transformComp2 es el frame i
 			finalTrans = (float)(1.0 - interpolation) * transformComp1 + transformComp2 * interpolation;
+			//unimos la matriz de interpolacion del quaternion y la interpolacion de la traslacion
 			interpoltaedMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(finalTrans)) * interpoltaedMatrix;
 
 			// Animacion KeyFrames
@@ -715,9 +725,11 @@ void applicationLoop() {
 		interpolation = numPasosAnimBrazoCurr / (float)numPasosAnimBrazo;
 
 		if (interpolation >= 1.0) {
+			interpolation = 0.0;
 			numPasosAnimBrazoCurr = 0;
 			indexKeyFrameBrazoCurr = indexKeyFrameBrazoNext;
 			indexKeyFrameBrazoNext++;
+			
 		}
 
 		if (indexKeyFrameBrazoNext > keyFramesBrazo.size() - 1) {

@@ -407,29 +407,29 @@ bool processInput(bool continueApplication) {
 		camera->moveRightCamera(true, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-			rot1 -= 0.02f;
+			rot1 -= 0.002f;
 		else
-			rot1 += 0.02f;
+			rot1 += 0.002f;
 	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-			rot2 -= 0.02f;
+			rot2 -= 0.002f;
 		else
-			rot2 += 0.02f;
+			rot2 += 0.002f;
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-			rot3 -= 0.02f;
+			rot3 -= 0.002f;
 		else
-			rot3 += 0.02f;
+			rot3 += 0.002f;
 	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-			rot4 -= 0.02f;
+			rot4 -= 0.002f;
 		else
-			rot4 += 0.02f;
+			rot4 += 0.002f;
 	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
 		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-			rot5 -= 0.02f;
+			rot5 -= 0.002f;
 		else
-			rot5 += 0.02f;
+			rot5 += 0.002f;
 	if (availableSave && glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
 		saveFrame = true;
 		availableSave = false;
@@ -504,9 +504,10 @@ void applicationLoop() {
 		glm::mat4 matrixL0 = glm::mat4(1.0f);
 		
 		// Se modela siempre con los ejes de giro en el eje z
+		//convencion de denavit-hartenberg para calcular la cinematica directa de un cuerpo rigido
 		// Articulacion 1
 		matrixL0 = glm::rotate(matrixL0, rot1, glm::vec3(0.0f, 0.0f, 1.0f));
-		if (saveFrame)
+		if (saveFrame)		//cada que se aprieta "R" se activa la bandera
 			ss << matToString(matrixL0) << "|";
 		glm::mat4 cylinderMatrixJ0 = glm::rotate(matrixL0, 1.5708f, glm::vec3(1.0, 0.0f, 0.0));
 		cylinderMatrixJ0 = glm::scale(cylinderMatrixJ0, glm::vec3(0.08f, 0.08f, 0.08f));
@@ -560,7 +561,7 @@ void applicationLoop() {
 		cylinderMatrixL2 = glm::scale(cylinderMatrixL2, glm::vec3(0.1f, 0.25f, 0.1f));
 		cylinderAnimacion.render(cylinderMatrixL2);
 
-		// Articulacion 5
+		// Articulacion 6
 		matrixL0 = glm::translate(matrixL0, glm::vec3(0.0f, 0.0f, 0.25f));
 		if (saveFrame)
 			ss << matToString(matrixL0) << "|";
